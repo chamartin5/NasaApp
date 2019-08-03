@@ -12,7 +12,7 @@ import Moya
 
 @testable import nasaApp
 
-class nasaApiControllerTests: XCTestCase {
+class NasaApiControllerTests: XCTestCase {
 
 	private var nasaApiProvider: NasaAPIProvider!
 	private var disposeBag: DisposeBag!

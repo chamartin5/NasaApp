@@ -35,9 +35,10 @@
 		C50D64FF22F4CC2200E7A218 /* NasaAPIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64FE22F4CC2200E7A218 /* NasaAPIProvider.swift */; };
 		C50D650222F4DD0700E7A218 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D650122F4DD0700E7A218 /* ImageCell.swift */; };
 		C50D650422F4DD1300E7A218 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C50D650322F4DD1300E7A218 /* ImageCell.xib */; };
-		C5C603D222F6136000D83D28 /* nasaApiControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C603D122F6136000D83D28 /* nasaApiControllerTests.swift */; };
+		C5C603D222F6136000D83D28 /* NasaApiControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C603D122F6136000D83D28 /* NasaApiControllerTests.swift */; };
 		C5C603DB22F6185500D83D28 /* nasaImages.json in Resources */ = {isa = PBXBuildFile; fileRef = C5C603DA22F6185500D83D28 /* nasaImages.json */; };
 		C5C603FD22F62D6100D83D28 /* NasaFullSizeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C603FC22F62D6100D83D28 /* NasaFullSizeViewModelTests.swift */; };
+		C5C6040D22F6352B00D83D28 /* NasaItemsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6040C22F6352B00D83D28 /* NasaItemsViewModelTests.swift */; };
 		D80D481380C1F79ED654F3D2 /* Pods_nasaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E3985163F0E0164A7B5681B /* Pods_nasaApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,10 +91,11 @@
 		C50D650122F4DD0700E7A218 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		C50D650322F4DD1300E7A218 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 		C5C603CF22F6136000D83D28 /* nasaAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nasaAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C5C603D122F6136000D83D28 /* nasaApiControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nasaApiControllerTests.swift; sourceTree = "<group>"; };
+		C5C603D122F6136000D83D28 /* NasaApiControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaApiControllerTests.swift; sourceTree = "<group>"; };
 		C5C603D322F6136000D83D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5C603DA22F6185500D83D28 /* nasaImages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = nasaImages.json; sourceTree = "<group>"; };
 		C5C603FC22F62D6100D83D28 /* NasaFullSizeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaFullSizeViewModelTests.swift; sourceTree = "<group>"; };
+		C5C6040C22F6352B00D83D28 /* NasaItemsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaItemsViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,8 +287,9 @@
 		C5C603D022F6136000D83D28 /* nasaAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				C5C6040C22F6352B00D83D28 /* NasaItemsViewModelTests.swift */,
 				C5C603FC22F62D6100D83D28 /* NasaFullSizeViewModelTests.swift */,
-				C5C603D122F6136000D83D28 /* nasaApiControllerTests.swift */,
+				C5C603D122F6136000D83D28 /* NasaApiControllerTests.swift */,
 				C5C603D322F6136000D83D28 /* Info.plist */,
 			);
 			path = nasaAppTests;
@@ -519,7 +522,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5C603FD22F62D6100D83D28 /* NasaFullSizeViewModelTests.swift in Sources */,
-				C5C603D222F6136000D83D28 /* nasaApiControllerTests.swift in Sources */,
+				C5C6040D22F6352B00D83D28 /* NasaItemsViewModelTests.swift in Sources */,
+				C5C603D222F6136000D83D28 /* NasaApiControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
