@@ -41,5 +41,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>LiterataBook-Bold.otf</string>
+		<string>LiterataBook-Italic.otf</string>
+		<string>LiterataBook-Medium.otf</string>
+		<string>LiterataBook.otf</string>
+	</array>
 </dict>
 </plist>

@@ -28,6 +28,8 @@ class NasaDetailsViewController: UIViewController {
 	@IBOutlet private weak var titleLabel: UILabel! {
 		didSet {
 			titleLabel.numberOfLines = 0
+//			guard let font = UIFont(name: "LiterataBook-Medium", size: 12) else { return }
+//			titleLabel.font = font
 		}
 	}
 

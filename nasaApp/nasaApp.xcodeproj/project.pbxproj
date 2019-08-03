@@ -13,6 +13,11 @@
 		C5091FA722F5720A00DA6866 /* NasaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FA622F5720A00DA6866 /* NasaItem.swift */; };
 		C5091FAA22F5778C00DA6866 /* NasaDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FA922F5778C00DA6866 /* NasaDetailsViewController.swift */; };
 		C5091FAC22F5779700DA6866 /* NasaDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FAB22F5779700DA6866 /* NasaDetailsViewModel.swift */; };
+		C5091FB622F5886600DA6866 /* LiterataBook-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5091FAE22F5886600DA6866 /* LiterataBook-Italic.otf */; };
+		C5091FB722F5886600DA6866 /* LiterataBook-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5091FAF22F5886600DA6866 /* LiterataBook-Bold.otf */; };
+		C5091FBA22F5886600DA6866 /* LiterataBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5091FB222F5886600DA6866 /* LiterataBook.otf */; };
+		C5091FBD22F5886600DA6866 /* LiterataBook-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5091FB522F5886600DA6866 /* LiterataBook-Medium.otf */; };
+		C5091FBF22F58A0900DA6866 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FBE22F58A0900DA6866 /* Fonts.swift */; };
 		C50D64DB22F4C00400E7A218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64DA22F4C00400E7A218 /* AppDelegate.swift */; };
 		C50D64DD22F4C00400E7A218 /* NasaItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64DC22F4C00400E7A218 /* NasaItemsViewController.swift */; };
 		C50D64E022F4C00400E7A218 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C50D64DE22F4C00400E7A218 /* Main.storyboard */; };
@@ -37,6 +42,11 @@
 		C5091FA622F5720A00DA6866 /* NasaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaItem.swift; sourceTree = "<group>"; };
 		C5091FA922F5778C00DA6866 /* NasaDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaDetailsViewController.swift; sourceTree = "<group>"; };
 		C5091FAB22F5779700DA6866 /* NasaDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaDetailsViewModel.swift; sourceTree = "<group>"; };
+		C5091FAE22F5886600DA6866 /* LiterataBook-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LiterataBook-Italic.otf"; sourceTree = "<group>"; };
+		C5091FAF22F5886600DA6866 /* LiterataBook-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LiterataBook-Bold.otf"; sourceTree = "<group>"; };
+		C5091FB222F5886600DA6866 /* LiterataBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LiterataBook.otf; sourceTree = "<group>"; };
+		C5091FB522F5886600DA6866 /* LiterataBook-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LiterataBook-Medium.otf"; sourceTree = "<group>"; };
+		C5091FBE22F58A0900DA6866 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		C50D64D722F4C00400E7A218 /* nasaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nasaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C50D64DA22F4C00400E7A218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C50D64DC22F4C00400E7A218 /* NasaItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaItemsViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +118,18 @@
 			path = NasaDetails;
 			sourceTree = "<group>";
 		};
+		C5091FAD22F5883300DA6866 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C5091FAF22F5886600DA6866 /* LiterataBook-Bold.otf */,
+				C5091FAE22F5886600DA6866 /* LiterataBook-Italic.otf */,
+				C5091FB522F5886600DA6866 /* LiterataBook-Medium.otf */,
+				C5091FB222F5886600DA6866 /* LiterataBook.otf */,
+				C5091FBE22F58A0900DA6866 /* Fonts.swift */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		C50D64CE22F4C00400E7A218 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +151,7 @@
 		C50D64D922F4C00400E7A218 /* nasaApp */ = {
 			isa = PBXGroup;
 			children = (
+				C5091FAD22F5883300DA6866 /* Fonts */,
 				C5091FA522F571F900DA6866 /* Entities */,
 				C5091FA022F5711C00DA6866 /* Mapper */,
 				C50D650022F4DCF900E7A218 /* Components */,
@@ -251,10 +274,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5091FB622F5886600DA6866 /* LiterataBook-Italic.otf in Resources */,
 				C50D64E522F4C00500E7A218 /* LaunchScreen.storyboard in Resources */,
 				C50D650422F4DD1300E7A218 /* ImageCell.xib in Resources */,
+				C5091FBD22F5886600DA6866 /* LiterataBook-Medium.otf in Resources */,
+				C5091FB722F5886600DA6866 /* LiterataBook-Bold.otf in Resources */,
 				C50D64E222F4C00500E7A218 /* Assets.xcassets in Resources */,
 				C50D64E022F4C00400E7A218 /* Main.storyboard in Resources */,
+				C5091FBA22F5886600DA6866 /* LiterataBook.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C50D64F522F4C1E300E7A218 /* NasaService.swift in Sources */,
+				C5091FBF22F58A0900DA6866 /* Fonts.swift in Sources */,
 				C50D64F922F4C2C600E7A218 /* AppStep.swift in Sources */,
 				C50D64DD22F4C00400E7A218 /* NasaItemsViewController.swift in Sources */,
 				C5091FAA22F5778C00DA6866 /* NasaDetailsViewController.swift in Sources */,
