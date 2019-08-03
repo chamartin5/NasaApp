@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5431033D7045E0573186A645 /* Pods_nasaAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B2B498BF363725AEA03AF3 /* Pods_nasaAppTests.framework */; };
+		5443159FA457B5B5D0C54233 /* Pods_nasaApp_nasaAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E47F32532391B81E9254581 /* Pods_nasaApp_nasaAppTests.framework */; };
 		C5091FA222F5712B00DA6866 /* NasaMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FA122F5712B00DA6866 /* NasaMapper.swift */; };
 		C5091FA422F5719100DA6866 /* NasaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FA322F5719100DA6866 /* NasaResponse.swift */; };
 		C5091FA722F5720A00DA6866 /* NasaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FA622F5720A00DA6866 /* NasaItem.swift */; };
@@ -52,9 +52,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		005415F52584FFBD0E74298C /* Pods-nasaApp-nasaAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nasaApp-nasaAppTests.release.xcconfig"; path = "Target Support Files/Pods-nasaApp-nasaAppTests/Pods-nasaApp-nasaAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		2E8C776790EE754BD579E215 /* Pods-nasaApp-nasaAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nasaApp-nasaAppTests.debug.xcconfig"; path = "Target Support Files/Pods-nasaApp-nasaAppTests/Pods-nasaApp-nasaAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3E47F32532391B81E9254581 /* Pods_nasaApp_nasaAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nasaApp_nasaAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E4D4BEA8D8BEBDC847A9854 /* Pods-nasaAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nasaAppTests.debug.xcconfig"; path = "Target Support Files/Pods-nasaAppTests/Pods-nasaAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E3985163F0E0164A7B5681B /* Pods_nasaApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nasaApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		73B2B498BF363725AEA03AF3 /* Pods_nasaAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nasaAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E23E2A8004BE035ABD064D /* Pods-nasaApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nasaApp.debug.xcconfig"; path = "Target Support Files/Pods-nasaApp/Pods-nasaApp.debug.xcconfig"; sourceTree = "<group>"; };
 		AC64B0CD04517DFA3AD0894D /* Pods-nasaApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nasaApp.release.xcconfig"; path = "Target Support Files/Pods-nasaApp/Pods-nasaApp.release.xcconfig"; sourceTree = "<group>"; };
 		C0DD3749BDEEE42C9956C909 /* Pods-nasaAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nasaAppTests.release.xcconfig"; path = "Target Support Files/Pods-nasaAppTests/Pods-nasaAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -107,7 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5431033D7045E0573186A645 /* Pods_nasaAppTests.framework in Frameworks */,
+				5443159FA457B5B5D0C54233 /* Pods_nasaApp_nasaAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +123,8 @@
 				AC64B0CD04517DFA3AD0894D /* Pods-nasaApp.release.xcconfig */,
 				3E4D4BEA8D8BEBDC847A9854 /* Pods-nasaAppTests.debug.xcconfig */,
 				C0DD3749BDEEE42C9956C909 /* Pods-nasaAppTests.release.xcconfig */,
+				2E8C776790EE754BD579E215 /* Pods-nasaApp-nasaAppTests.debug.xcconfig */,
+				005415F52584FFBD0E74298C /* Pods-nasaApp-nasaAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -129,7 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				6E3985163F0E0164A7B5681B /* Pods_nasaApp.framework */,
-				73B2B498BF363725AEA03AF3 /* Pods_nasaAppTests.framework */,
+				3E47F32532391B81E9254581 /* Pods_nasaApp_nasaAppTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -432,15 +436,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nasaAppTests/Pods-nasaAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-nasaApp-nasaAppTests/Pods-nasaApp-nasaAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nasaAppTests/Pods-nasaAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-nasaApp-nasaAppTests/Pods-nasaApp-nasaAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nasaAppTests/Pods-nasaAppTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nasaApp-nasaAppTests/Pods-nasaApp-nasaAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D58FE00C0C8566BF7D05FFA0 /* [CP] Check Pods Manifest.lock */ = {
@@ -458,7 +462,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-nasaAppTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-nasaApp-nasaAppTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -703,7 +707,7 @@
 		};
 		C5C603D622F6136000D83D28 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E4D4BEA8D8BEBDC847A9854 /* Pods-nasaAppTests.debug.xcconfig */;
+			baseConfigurationReference = 2E8C776790EE754BD579E215 /* Pods-nasaApp-nasaAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -723,7 +727,7 @@
 		};
 		C5C603D722F6136000D83D28 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C0DD3749BDEEE42C9956C909 /* Pods-nasaAppTests.release.xcconfig */;
+			baseConfigurationReference = 005415F52584FFBD0E74298C /* Pods-nasaApp-nasaAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

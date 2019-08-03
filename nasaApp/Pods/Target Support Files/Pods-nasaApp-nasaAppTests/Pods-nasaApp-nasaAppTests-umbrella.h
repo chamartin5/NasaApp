@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_nasaAppTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_nasaAppTestsVersionString[];
+FOUNDATION_EXPORT double Pods_nasaApp_nasaAppTestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_nasaApp_nasaAppTestsVersionString[];
 

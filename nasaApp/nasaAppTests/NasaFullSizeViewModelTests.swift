@@ -8,36 +8,61 @@
 
 import XCTest
 import RxSwift
+import RxTest
 
 @testable import nasaApp
 
 class NasaFullSizeViewModelTests: XCTestCase {
 	enum Constants {
-		static let fakeUrl = "https://images-assets.nasa.gov/image/0000485/0000485~thumb.jpg"
+		static let fakeUrl: URL? = URL(string: "https://images-assets.nasa.gov/image/0000485/0000485~thumb.jpg")
 	}
-	private var nasaItemsViewModel: NasaFullSizeViewModel!
+	private var nasaFullSizeViewModel: NasaFullSizeViewModel!
+	private var nasaDetailsViewModel: NasaDetailsViewModel!
 	private var disposeBag: DisposeBag!
+	var scheduler: TestScheduler!
 
 	override func setUp() {
 		super.setUp()
-		let url = URL(string: Constants.fakeUrl)
-		nasaItemsViewModel = NasaFullSizeViewModel(url: url)
+		nasaFullSizeViewModel = NasaFullSizeViewModel(url: Constants.fakeUrl)
+		let nasaItem = NasaItem(center: "", title: "", description: "", createdDate: nil, keywords: [""], nasaId: "", imageUrl: Constants.fakeUrl)
+		nasaDetailsViewModel = NasaDetailsViewModel(nasaItem: nasaItem)
 		disposeBag = DisposeBag()
+		scheduler = TestScheduler(initialClock: 0)
 	}
 
 	override func tearDown() {
 		super.tearDown()
-		nasaItemsViewModel = nil
+		nasaFullSizeViewModel = nil
+		nasaDetailsViewModel = nil
 		disposeBag = nil
+		scheduler = nil
 	}
 
     func testBindUrl() {
-		nasaItemsViewModel.output.url
+		nasaFullSizeViewModel.output.url
 			.subscribe(onNext: { url in
-				XCTAssertEqual(url?.absoluteString, Constants.fakeUrl)
+				XCTAssertEqual(url, Constants.fakeUrl)
 			})
 			.disposed(by: disposeBag)
     }
+
+	func testTapOnImage() {
+		let isShowingFullImage = scheduler.createObserver(URL?.self)
+
+		nasaFullSizeViewModel.output.url
+			.bind(to: isShowingFullImage)
+			.disposed(by: disposeBag)
+
+		scheduler.createColdObservable([.next(10, ())])
+			.bind(to: nasaDetailsViewModel.input.tapOnImage)
+			.disposed(by: disposeBag)
+
+		scheduler.start()
+
+		let events = isShowingFullImage.events
+		XCTAssertEqual(events.count, 1)
+		XCTAssertEqual(isShowingFullImage.events, [.next(0, Constants.fakeUrl)])
+	}
 
 }
 

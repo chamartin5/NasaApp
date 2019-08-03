@@ -11,12 +11,12 @@ target 'nasaApp' do
   pod 'RxDataSources', '~> 3.1.0'
 	pod 'Kingfisher', '~> 4.0'
 	pod 'RxGesture', '~> 2.1.0'
+
+	target 'nasaAppTests' do
+		use_frameworks!
+
+		pod 'RxTest'
+	end
 end
 
-target 'nasaAppTests' do
-	use_frameworks!
 
-	pod 'RxSwift', '~> 4.4.0'
-	pod 'RxTest', '~> 4.4.0'
-	pod 'Moya/RxSwift', '~> 12.0.1'
-end
