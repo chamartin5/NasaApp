@@ -29,14 +29,14 @@ class NasaDetailsViewController: UIViewController {
 	@IBOutlet private weak var titleLabel: UILabel! {
 		didSet {
 			titleLabel.numberOfLines = 0
-			titleLabel.font = UIFont(name: Fonts.nasa, size: 25)
+			titleLabel.font = UIFont(name: FontHelper.nasa, size: 25)
 		}
 	}
 
 	@IBOutlet private weak var subtitleLabel: UILabel! {
 		didSet {
 			subtitleLabel.numberOfLines = 0
-			subtitleLabel.font = UIFont(name: Fonts.italic, size: 20)
+			subtitleLabel.font = UIFont(name: FontHelper.italic, size: 20)
 			subtitleLabel.textColor = .gray
 		}
 	}
@@ -44,21 +44,21 @@ class NasaDetailsViewController: UIViewController {
 	@IBOutlet private weak var descriptionLabel: UILabel! {
 		didSet {
 			descriptionLabel.numberOfLines = 0
-			descriptionLabel.font = UIFont(name: Fonts.medium, size: 15)
+			descriptionLabel.font = UIFont(name: FontHelper.medium, size: 15)
 		}
 	}
 
 	@IBOutlet private weak var keywordsTitleLabel: UILabel! {
 		didSet {
 			keywordsTitleLabel.text = Constants.keywordsTitle
-			keywordsTitleLabel.font = UIFont(name: Fonts.bold, size: 15)
+			keywordsTitleLabel.font = UIFont(name: FontHelper.bold, size: 15)
 		}
 	}
 
 	@IBOutlet private weak var keywordsLabel: UILabel! {
 		didSet {
 			keywordsLabel.numberOfLines = 0
-			keywordsLabel.font = UIFont(name: Fonts.medium, size: 15)
+			keywordsLabel.font = UIFont(name: FontHelper.medium, size: 15)
 		}
 	}
 

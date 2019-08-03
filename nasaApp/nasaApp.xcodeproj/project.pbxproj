@@ -17,7 +17,7 @@
 		C5091FB722F5886600DA6866 /* LiterataBook-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5091FAF22F5886600DA6866 /* LiterataBook-Bold.otf */; };
 		C5091FBA22F5886600DA6866 /* LiterataBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5091FB222F5886600DA6866 /* LiterataBook.otf */; };
 		C5091FBD22F5886600DA6866 /* LiterataBook-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5091FB522F5886600DA6866 /* LiterataBook-Medium.otf */; };
-		C5091FBF22F58A0900DA6866 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FBE22F58A0900DA6866 /* Fonts.swift */; };
+		C5091FBF22F58A0900DA6866 /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FBE22F58A0900DA6866 /* FontHelper.swift */; };
 		C5091FC222F5DB0A00DA6866 /* NasaFullSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FC122F5DB0A00DA6866 /* NasaFullSizeViewController.swift */; };
 		C5091FC422F5DB1700DA6866 /* NasaFullSizeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FC322F5DB1700DA6866 /* NasaFullSizeViewModel.swift */; };
 		C5091FC622F5E60900DA6866 /* nasalization.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5091FC522F5E60900DA6866 /* nasalization.ttf */; };
@@ -70,7 +70,7 @@
 		C5091FAF22F5886600DA6866 /* LiterataBook-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LiterataBook-Bold.otf"; sourceTree = "<group>"; };
 		C5091FB222F5886600DA6866 /* LiterataBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LiterataBook.otf; sourceTree = "<group>"; };
 		C5091FB522F5886600DA6866 /* LiterataBook-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LiterataBook-Medium.otf"; sourceTree = "<group>"; };
-		C5091FBE22F58A0900DA6866 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		C5091FBE22F58A0900DA6866 /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
 		C5091FC122F5DB0A00DA6866 /* NasaFullSizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaFullSizeViewController.swift; sourceTree = "<group>"; };
 		C5091FC322F5DB1700DA6866 /* NasaFullSizeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaFullSizeViewModel.swift; sourceTree = "<group>"; };
 		C5091FC522F5E60900DA6866 /* nasalization.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nasalization.ttf; sourceTree = "<group>"; };
@@ -140,17 +140,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C5091FA022F5711C00DA6866 /* Mapper */ = {
-			isa = PBXGroup;
-			children = (
-				C5091FA122F5712B00DA6866 /* NasaMapper.swift */,
-			);
-			path = Mapper;
-			sourceTree = "<group>";
-		};
 		C5091FA522F571F900DA6866 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				C5091FA122F5712B00DA6866 /* NasaMapper.swift */,
 				C5091FA622F5720A00DA6866 /* NasaItem.swift */,
 			);
 			path = Entities;
@@ -189,9 +182,8 @@
 		C5091FC722F5E78D00DA6866 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				C5091FAD22F5883300DA6866 /* Fonts */,
 				C5091FC822F5E7A700DA6866 /* DateHelper.swift */,
-				C5091FBE22F58A0900DA6866 /* Fonts.swift */,
+				C5091FBE22F58A0900DA6866 /* FontHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -222,7 +214,6 @@
 				C5C603D922F6183D00D83D28 /* Resources */,
 				C5091FC722F5E78D00DA6866 /* Helpers */,
 				C5091FA522F571F900DA6866 /* Entities */,
-				C5091FA022F5711C00DA6866 /* Mapper */,
 				C50D650022F4DCF900E7A218 /* Components */,
 				C50D64F322F4C1D200E7A218 /* Network */,
 				C50D64F222F4C1C900E7A218 /* Navigation */,
@@ -298,6 +289,7 @@
 		C5C603D922F6183D00D83D28 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C5091FAD22F5883300DA6866 /* Fonts */,
 				C5C603DA22F6185500D83D28 /* nasaImages.json */,
 			);
 			path = Resources;
@@ -497,7 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C50D64F522F4C1E300E7A218 /* NasaService.swift in Sources */,
-				C5091FBF22F58A0900DA6866 /* Fonts.swift in Sources */,
+				C5091FBF22F58A0900DA6866 /* FontHelper.swift in Sources */,
 				C50D64F922F4C2C600E7A218 /* AppStep.swift in Sources */,
 				C50D64DD22F4C00400E7A218 /* NasaItemsViewController.swift in Sources */,
 				C5091FAA22F5778C00DA6866 /* NasaDetailsViewController.swift in Sources */,

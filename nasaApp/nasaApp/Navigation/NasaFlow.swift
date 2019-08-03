@@ -72,6 +72,7 @@ class NasaFlow: Flow {
 		let viewModel = NasaFullSizeViewModel(url: url)
 		viewController.viewModel = viewModel
 
+		self.rootViewController.popViewController(animated: true)
 		self.rootViewController.present(viewController, animated: true, completion: nil)
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}

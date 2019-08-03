@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum Fonts {
+enum FontHelper {
 	static let bold = "LiterataBook-Bold"
 	static let italic = "LiterataBook-Italic"
 	static let medium = "LiterataBook-Medium"
