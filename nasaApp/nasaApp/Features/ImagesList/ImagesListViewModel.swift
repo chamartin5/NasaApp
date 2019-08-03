@@ -13,7 +13,7 @@ import Moya
 import Result
 import RxDataSources
 
-typealias ImagesSectionModel = SectionModel<String, String>
+typealias ImagesSectionModel = SectionModel<String, NasaItem>
 
 class ImagesListViewModel: Stepper {
 	let steps = PublishRelay<Step>()
@@ -41,23 +41,19 @@ class ImagesListViewModel: Stepper {
 }
 
 private extension ImagesListViewModel {
+
 	func setupBindings() {
 		apiProvider.getDetail()
 			.map { result -> ImagesSectionModel? in
 				switch result {
-				case .success(let imageResponse):
-					let images = imageResponse.collection.items.map { item -> String? in
-						guard let link = item.links.first?.href else { return nil }
-						return link
-					}
-					let notNilImages = Array(images
-						.compactMap { $0 }
-						.prefix(20))
-					return ImagesSectionModel.init(model: "", items: notNilImages)
+				case .success(let nasaItems):
+					let firstTwentyItems = Array(nasaItems.prefix(20))
+					return ImagesSectionModel.init(model: "", items: firstTwentyItems)
 				case .failure:
 					return nil
 				}
-			}.asObservable()
+			}
+			.asObservable()
 			.subscribe(onNext: { [weak self] imagesSectionModel in
 				guard let self = self, let imagesSectionModel = imagesSectionModel else { return }
 				self.outputSections.onNext([imagesSectionModel])

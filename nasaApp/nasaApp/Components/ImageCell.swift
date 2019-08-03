@@ -18,8 +18,7 @@ class ImageCell: UICollectionViewCell {
 		}
 	}
 
-	func configure(url: String) {
-		guard let url = URL(string: url) else { return }
+	func configure(url: URL?) {
 		nasaImage.kf.setImage(with: url)
 	}
 }

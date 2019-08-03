@@ -50,18 +50,27 @@ private extension ImagesListViewController {
 private extension ImagesListViewController {
 	func  setupBindings() {
 		setupDataSource()
+		setupTapOnCell()
 	}
 
 	func setupDataSource() {
 		dataSource = RxCollectionViewSectionedReloadDataSource(
-			configureCell: { (_, collectionView, indexPath, url) -> UICollectionViewCell in
+			configureCell: { (_, collectionView, indexPath, data) -> UICollectionViewCell in
 				guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellId, for: indexPath) as? ImageCell else { return UICollectionViewCell() }
-				cell.configure(url: url)
+				cell.configure(url: data.imageUrl)
 				return cell
 		})
 
 		viewModel.output.sections
 			.bind(to: collectionView.rx.items(dataSource: dataSource))
+			.disposed(by: disposeBag)
+	}
+
+	func setupTapOnCell() {
+		collectionView.rx.modelSelected(NasaItem.self)
+			.subscribe(onNext: { value in
+				print("modelSelected \(value)")
+			})
 			.disposed(by: disposeBag)
 	}
 }
