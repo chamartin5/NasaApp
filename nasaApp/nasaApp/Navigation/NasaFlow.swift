@@ -6,6 +6,7 @@
 //  Copyright © 2019 Charlotte Martin. All rights reserved.
 //
 import RxFlow
+import Moya
 
 class NasaFlow: Flow {
 	var root: Presentable {
@@ -31,7 +32,8 @@ class NasaFlow: Flow {
 		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaItemsViewController") as? NasaItemsViewController else {
 			return .none
 		}
-		let viewModel = NasaItemsViewModel()
+		let nasaApiProvider = NasaAPIProvider(provider: MoyaProvider<NasaService>())
+		let viewModel = NasaItemsViewModel(nasaApiProvider: nasaApiProvider)
 		viewController.viewModel = viewModel
 
 		self.rootViewController.pushViewController(viewController, animated: true)

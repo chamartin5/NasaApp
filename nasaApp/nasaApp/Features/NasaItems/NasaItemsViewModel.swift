@@ -16,9 +16,9 @@ import RxDataSources
 typealias NasaSectionModel = SectionModel<String, NasaItem>
 
 class NasaItemsViewModel: Stepper {
+	private let nasaApiProvider: NasaAPIProvider!
 	let steps = PublishRelay<Step>()
 	private let disposeBag = DisposeBag()
-	private let apiProvider = APIProvider(provider: MoyaProvider<NasaService>())
 
 	struct Input {
 		let tapOnCell: AnyObserver<NasaItem>
@@ -34,7 +34,8 @@ class NasaItemsViewModel: Stepper {
 	private let tapOnCellSubject = PublishSubject<NasaItem>()
 	private let sectionsSubject = ReplaySubject<[NasaSectionModel]>.create(bufferSize: 1)
 
-	init() {
+	init(nasaApiProvider: NasaAPIProvider) {
+		self.nasaApiProvider = nasaApiProvider
 		self.input = Input(tapOnCell: tapOnCellSubject.asObserver())
 		self.output = Output(sections: sectionsSubject.asObservable())
 		setupBindings()
@@ -48,7 +49,7 @@ private extension NasaItemsViewModel {
 	}
 
 	func bindSections() {
-		apiProvider.getDetail()
+		nasaApiProvider.getNasaImagesDetail()
 			.map { result -> NasaSectionModel? in
 				switch result {
 				case .success(let nasaItems):

@@ -15,14 +15,14 @@ enum ImageError: Error {
 	case failGetImages
 }
 
-class APIProvider {
+class NasaAPIProvider {
 	private let provider: MoyaProvider<NasaService>
 
 	init(provider: MoyaProvider<NasaService>) {
 		self.provider = provider
 	}
 
-	public func getDetail() -> Single<Result<[NasaItem], ImageError>> {
+	public func getNasaImagesDetail() -> Single<Result<[NasaItem], ImageError>> {
 		return provider.rx.request(.all)
 			.map(NasaResponse.self)
 			.map { nasaReponse -> Result<[NasaItem], ImageError> in
