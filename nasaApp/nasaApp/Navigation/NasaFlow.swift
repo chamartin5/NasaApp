@@ -21,6 +21,8 @@ class NasaFlow: Flow {
 			return navigateToImagesList()
 		case .detail(let nasaItem):
 			return navigateToNasaItem(nasaItem: nasaItem)
+		case .nasaFullSize(let url):
+			return navigateToNasaFullSize(url: url)
 		}
 	}
 
@@ -45,6 +47,30 @@ class NasaFlow: Flow {
 		viewController.viewModel = viewModel
 
 		self.rootViewController.pushViewController(viewController, animated: true)
+		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
+	}
+
+	private func navigateToNasaFullSize(url: URL?) -> FlowContributors {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaFullSizeViewController") as? NasaFullSizeViewController else {
+			return .none
+		}
+		let viewModel = NasaFullSizeViewModel(url: url)
+		viewController.viewModel = viewModel
+
+		self.rootViewController.pushViewController(viewController, animated: true)
+		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
+	}
+
+	func navigateToNasaFullSizeModally(url: URL?) -> FlowContributors {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaFullSizeViewController") as? NasaFullSizeViewController else {
+			return .none
+		}
+		let viewModel = NasaFullSizeViewModel(url: url)
+		viewController.viewModel = viewModel
+
+		self.rootViewController.present(viewController, animated: true, completion: nil)
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}
 }

@@ -10,4 +10,5 @@ target 'nasaApp' do
   pod 'Moya/RxSwift', '~> 12.0.1'
   pod 'RxDataSources', '~> 3.1.0'
 	pod 'Kingfisher', '~> 4.0'
+	pod 'RxGesture', '~> 2.1.0'
 end

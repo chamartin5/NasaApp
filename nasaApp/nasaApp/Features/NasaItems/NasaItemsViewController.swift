@@ -47,6 +47,7 @@ private extension NasaItemsViewController {
 	}
 }
 
+// MARK: bindings
 private extension NasaItemsViewController {
 	func  setupBindings() {
 		setupDataSource()
@@ -73,6 +74,7 @@ private extension NasaItemsViewController {
 	}
 }
 
+// MARK: collection view config
 extension NasaItemsViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		let totalSpacing = Constants.spacing * (Constants.numberOfItemsPerRow + 1)

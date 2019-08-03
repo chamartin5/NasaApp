@@ -12,7 +12,7 @@ public struct NasaItem {
 	let center: String
 	let title: String
 	let description: String
-	let createdDate: String
+	let createdDate: Date?
 	let keywords: [String]
 	let nasaId: String
 	let imageUrl: URL?

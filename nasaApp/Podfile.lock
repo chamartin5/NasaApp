@@ -19,6 +19,9 @@ PODS:
   - RxFlow (2.0.0):
     - RxCocoa (>= 4.4.0)
     - RxSwift (>= 4.4.0)
+  - RxGesture (2.1.0):
+    - RxCocoa (~> 4.4.0)
+    - RxSwift (~> 4.4.0)
   - RxSwift (4.4.2):
     - RxAtomic (>= 4.4.2, ~> 4.4)
   - SwifterSwift (3.2.0):
@@ -41,6 +44,7 @@ DEPENDENCIES:
   - RxCocoa (~> 4.4.0)
   - RxDataSources (~> 3.1.0)
   - RxFlow (~> 2.0.0)
+  - RxGesture (~> 2.1.0)
   - RxSwift (~> 4.4.0)
   - SwifterSwift (~> 3.2.0)
 
@@ -55,6 +59,7 @@ SPEC REPOS:
     - RxCocoa
     - RxDataSources
     - RxFlow
+    - RxGesture
     - RxSwift
     - SwifterSwift
 
@@ -68,9 +73,10 @@ SPEC CHECKSUMS:
   RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxFlow: f0212025e3747431b3be09c6be04bfde0a3bf5a4
+  RxGesture: 7f6dfb45dbde06e618c24442d38493e3144f2c95
   RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
   SwifterSwift: e009210d995737f54c1fbffc5a3f004c8467ab1d
 
-PODFILE CHECKSUM: a21a9e75daf5ac4fe778c008f602892c35c01843
+PODFILE CHECKSUM: d359bb42df43db674c7d32452fd8536c81ae18bf
 
 COCOAPODS: 1.7.2

@@ -18,6 +18,10 @@
 		C5091FBA22F5886600DA6866 /* LiterataBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5091FB222F5886600DA6866 /* LiterataBook.otf */; };
 		C5091FBD22F5886600DA6866 /* LiterataBook-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C5091FB522F5886600DA6866 /* LiterataBook-Medium.otf */; };
 		C5091FBF22F58A0900DA6866 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FBE22F58A0900DA6866 /* Fonts.swift */; };
+		C5091FC222F5DB0A00DA6866 /* NasaFullSizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FC122F5DB0A00DA6866 /* NasaFullSizeViewController.swift */; };
+		C5091FC422F5DB1700DA6866 /* NasaFullSizeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FC322F5DB1700DA6866 /* NasaFullSizeViewModel.swift */; };
+		C5091FC622F5E60900DA6866 /* nasalization.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5091FC522F5E60900DA6866 /* nasalization.ttf */; };
+		C5091FC922F5E7A700DA6866 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FC822F5E7A700DA6866 /* DateHelper.swift */; };
 		C50D64DB22F4C00400E7A218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64DA22F4C00400E7A218 /* AppDelegate.swift */; };
 		C50D64DD22F4C00400E7A218 /* NasaItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64DC22F4C00400E7A218 /* NasaItemsViewController.swift */; };
 		C50D64E022F4C00400E7A218 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C50D64DE22F4C00400E7A218 /* Main.storyboard */; };
@@ -47,6 +51,10 @@
 		C5091FB222F5886600DA6866 /* LiterataBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LiterataBook.otf; sourceTree = "<group>"; };
 		C5091FB522F5886600DA6866 /* LiterataBook-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LiterataBook-Medium.otf"; sourceTree = "<group>"; };
 		C5091FBE22F58A0900DA6866 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		C5091FC122F5DB0A00DA6866 /* NasaFullSizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaFullSizeViewController.swift; sourceTree = "<group>"; };
+		C5091FC322F5DB1700DA6866 /* NasaFullSizeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaFullSizeViewModel.swift; sourceTree = "<group>"; };
+		C5091FC522F5E60900DA6866 /* nasalization.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nasalization.ttf; sourceTree = "<group>"; };
+		C5091FC822F5E7A700DA6866 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		C50D64D722F4C00400E7A218 /* nasaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nasaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C50D64DA22F4C00400E7A218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C50D64DC22F4C00400E7A218 /* NasaItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaItemsViewController.swift; sourceTree = "<group>"; };
@@ -125,9 +133,28 @@
 				C5091FAE22F5886600DA6866 /* LiterataBook-Italic.otf */,
 				C5091FB522F5886600DA6866 /* LiterataBook-Medium.otf */,
 				C5091FB222F5886600DA6866 /* LiterataBook.otf */,
-				C5091FBE22F58A0900DA6866 /* Fonts.swift */,
+				C5091FC522F5E60900DA6866 /* nasalization.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C5091FC022F5DAF500DA6866 /* FullSize */ = {
+			isa = PBXGroup;
+			children = (
+				C5091FC122F5DB0A00DA6866 /* NasaFullSizeViewController.swift */,
+				C5091FC322F5DB1700DA6866 /* NasaFullSizeViewModel.swift */,
+			);
+			path = FullSize;
+			sourceTree = "<group>";
+		};
+		C5091FC722F5E78D00DA6866 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C5091FAD22F5883300DA6866 /* Fonts */,
+				C5091FC822F5E7A700DA6866 /* DateHelper.swift */,
+				C5091FBE22F58A0900DA6866 /* Fonts.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		C50D64CE22F4C00400E7A218 = {
@@ -151,7 +178,7 @@
 		C50D64D922F4C00400E7A218 /* nasaApp */ = {
 			isa = PBXGroup;
 			children = (
-				C5091FAD22F5883300DA6866 /* Fonts */,
+				C5091FC722F5E78D00DA6866 /* Helpers */,
 				C5091FA522F571F900DA6866 /* Entities */,
 				C5091FA022F5711C00DA6866 /* Mapper */,
 				C50D650022F4DCF900E7A218 /* Components */,
@@ -170,6 +197,7 @@
 		C50D64EC22F4C15800E7A218 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				C5091FC022F5DAF500DA6866 /* FullSize */,
 				C5091FA822F5776E00DA6866 /* NasaDetails */,
 				C50D64ED22F4C16800E7A218 /* NasaItems */,
 			);
@@ -278,6 +306,7 @@
 				C50D64E522F4C00500E7A218 /* LaunchScreen.storyboard in Resources */,
 				C50D650422F4DD1300E7A218 /* ImageCell.xib in Resources */,
 				C5091FBD22F5886600DA6866 /* LiterataBook-Medium.otf in Resources */,
+				C5091FC622F5E60900DA6866 /* nasalization.ttf in Resources */,
 				C5091FB722F5886600DA6866 /* LiterataBook-Bold.otf in Resources */,
 				C50D64E222F4C00500E7A218 /* Assets.xcassets in Resources */,
 				C50D64E022F4C00400E7A218 /* Main.storyboard in Resources */,
@@ -340,13 +369,16 @@
 				C50D64DD22F4C00400E7A218 /* NasaItemsViewController.swift in Sources */,
 				C5091FAA22F5778C00DA6866 /* NasaDetailsViewController.swift in Sources */,
 				C50D64DB22F4C00400E7A218 /* AppDelegate.swift in Sources */,
+				C5091FC222F5DB0A00DA6866 /* NasaFullSizeViewController.swift in Sources */,
 				C5091FA422F5719100DA6866 /* NasaResponse.swift in Sources */,
 				C50D64F722F4C2A000E7A218 /* AppFlow.swift in Sources */,
 				C50D64FF22F4CC2200E7A218 /* ApiProvider.swift in Sources */,
 				C5091FA722F5720A00DA6866 /* NasaItem.swift in Sources */,
 				C50D64FB22F4C30800E7A218 /* NasaFlow.swift in Sources */,
+				C5091FC422F5DB1700DA6866 /* NasaFullSizeViewModel.swift in Sources */,
 				C50D64EF22F4C19A00E7A218 /* NasaItemsViewModel.swift in Sources */,
 				C50D650222F4DD0700E7A218 /* ImageCell.swift in Sources */,
+				C5091FC922F5E7A700DA6866 /* DateHelper.swift in Sources */,
 				C5091FAC22F5779700DA6866 /* NasaDetailsViewModel.swift in Sources */,
 				C5091FA222F5712B00DA6866 /* NasaMapper.swift in Sources */,
 			);
