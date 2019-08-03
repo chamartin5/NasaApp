@@ -11,14 +11,19 @@ import RxSwift
 import RxDataSources
 
 class ImagesListViewController: UIViewController {
-	private let spacing:CGFloat = 16.0
-	private let cellId = "ImageCell"
+	private enum Constants {
+		static let cellId = "ImageCell"
+		static let spacing: CGFloat = 15
+		static let numberOfItemsPerRow: CGFloat = 3
+	}
+
 	private var disposeBag = DisposeBag()
 	var viewModel: ImagesListViewModel!
 	private var dataSource: RxCollectionViewSectionedReloadDataSource<ImagesSectionModel>!
 
 	@IBOutlet private weak var collectionView: UICollectionView! {
 		didSet {
+			let cellId = Constants.cellId
 			collectionView.register(UINib.init(nibName: cellId, bundle: nil), forCellWithReuseIdentifier: cellId)
 			collectionView.rx.setDelegate(self).disposed(by: disposeBag)
 		}
@@ -35,19 +40,22 @@ class ImagesListViewController: UIViewController {
 private extension ImagesListViewController {
 	func setupCollectionViewUI() {
 		let layout = UICollectionViewFlowLayout()
-		layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-		layout.minimumLineSpacing = spacing
-		layout.minimumInteritemSpacing = spacing
+		layout.sectionInset = UIEdgeInsets(top: Constants.spacing, left: Constants.spacing, bottom: Constants.spacing, right: Constants.spacing)
+		layout.minimumLineSpacing = Constants.spacing
+		layout.minimumInteritemSpacing = Constants.spacing
 		self.collectionView?.collectionViewLayout = layout
 	}
 }
 
 private extension ImagesListViewController {
-	func setupBindings() {
+	func  setupBindings() {
+		setupDataSource()
+	}
+
+	func setupDataSource() {
 		dataSource = RxCollectionViewSectionedReloadDataSource(
-			configureCell: { [weak self] (_, collectionView, indexPath, url) -> UICollectionViewCell in
-				guard let self = self else { return UICollectionViewCell() }
-				guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as? ImageCell else { return UICollectionViewCell() }
+			configureCell: { (_, collectionView, indexPath, url) -> UICollectionViewCell in
+				guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellId, for: indexPath) as? ImageCell else { return UICollectionViewCell() }
 				cell.configure(url: url)
 				return cell
 		})
@@ -60,19 +68,9 @@ private extension ImagesListViewController {
 
 extension ImagesListViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-//		let cellWidth2 = CGFloat((collectionView.frame.size.width / 3) - 10)
-//		print(cellWidth2)
-//		let cellWidth = 100
-//		let cellHeight = 100
-//
-//		return CGSize(width: cellWidth2, height: cellWidth2)
-
-		let numberOfItemsPerRow: CGFloat = 3
-		let spacingBetweenCells: CGFloat = 16
-
-		let totalSpacing = (2 * spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
-		let width = (collectionView.bounds.width - totalSpacing) / numberOfItemsPerRow - 1
+		let totalSpacing = Constants.spacing * (Constants.numberOfItemsPerRow + 1)
+		let collectionViewWidth = collectionView.bounds.width
+		let width = Int((collectionViewWidth - totalSpacing) / Constants.numberOfItemsPerRow)
 		return CGSize(width: width, height: width)
 	}
 }
