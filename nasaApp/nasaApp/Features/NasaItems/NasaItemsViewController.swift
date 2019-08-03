@@ -10,16 +10,16 @@ import UIKit
 import RxSwift
 import RxDataSources
 
-class ImagesListViewController: UIViewController {
+class NasaItemsViewController: UIViewController {
 	private enum Constants {
 		static let cellId = "ImageCell"
 		static let spacing: CGFloat = 15
 		static let numberOfItemsPerRow: CGFloat = 3
 	}
 
-	private var disposeBag = DisposeBag()
-	var viewModel: ImagesListViewModel!
-	private var dataSource: RxCollectionViewSectionedReloadDataSource<ImagesSectionModel>!
+	private let disposeBag = DisposeBag()
+	var viewModel: NasaItemsViewModel!
+	private var dataSource: RxCollectionViewSectionedReloadDataSource<NasaSectionModel>!
 
 	@IBOutlet private weak var collectionView: UICollectionView! {
 		didSet {
@@ -37,7 +37,7 @@ class ImagesListViewController: UIViewController {
 }
 
 // MARK: UI
-private extension ImagesListViewController {
+private extension NasaItemsViewController {
 	func setupCollectionViewUI() {
 		let layout = UICollectionViewFlowLayout()
 		layout.sectionInset = UIEdgeInsets(top: Constants.spacing, left: Constants.spacing, bottom: Constants.spacing, right: Constants.spacing)
@@ -47,7 +47,7 @@ private extension ImagesListViewController {
 	}
 }
 
-private extension ImagesListViewController {
+private extension NasaItemsViewController {
 	func  setupBindings() {
 		setupDataSource()
 		setupTapOnCell()
@@ -68,14 +68,12 @@ private extension ImagesListViewController {
 
 	func setupTapOnCell() {
 		collectionView.rx.modelSelected(NasaItem.self)
-			.subscribe(onNext: { value in
-				print("modelSelected \(value)")
-			})
+			.bind(to: viewModel.input.tapOnCell)
 			.disposed(by: disposeBag)
 	}
 }
 
-extension ImagesListViewController: UICollectionViewDelegateFlowLayout {
+extension NasaItemsViewController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		let totalSpacing = Constants.spacing * (Constants.numberOfItemsPerRow + 1)
 		let collectionViewWidth = collectionView.bounds.width

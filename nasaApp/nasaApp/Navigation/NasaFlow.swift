@@ -19,29 +19,32 @@ class NasaFlow: Flow {
 		switch step {
 		case .imagesList:
 			return navigateToImagesList()
-		case .detail:
-			return .none
+		case .detail(let nasaItem):
+			return navigateToNasaItem(nasaItem: nasaItem)
 		}
 	}
 
 	private func navigateToImagesList() -> FlowContributors {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		guard let viewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as? ImagesListViewController else {
+		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaItemsViewController") as? NasaItemsViewController else {
 			return .none
 		}
-		let viewModel = ImagesListViewModel()
+		let viewModel = NasaItemsViewModel()
 		viewController.viewModel = viewModel
 
 		self.rootViewController.pushViewController(viewController, animated: true)
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}
 
-//	private func navigateToMemberDetail(memberId: Int) -> FlowContributors {
-//		let viewController = StoryboardScene.Member.memberDetailViewController.instantiate()
-//		let viewModel = MemberDetailViewModel(memberId: memberId)
-//		viewController.viewModel = viewModel
-//
-//		self.rootViewController.pushViewController(viewController, animated: true)
-//		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
-//	}
+	private func navigateToNasaItem(nasaItem: NasaItem) -> FlowContributors {
+		let storyboard = UIStoryboard(name: "Main", bundle: nil)
+		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaDetailsViewController") as? NasaDetailsViewController else {
+			return .none
+		}
+		let viewModel = NasaDetailsViewModel(nasaItem: nasaItem)
+		viewController.viewModel = viewModel
+
+		self.rootViewController.pushViewController(viewController, animated: true)
+		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
+	}
 }

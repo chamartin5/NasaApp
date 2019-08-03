@@ -11,12 +11,14 @@
 		C5091FA222F5712B00DA6866 /* NasaMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FA122F5712B00DA6866 /* NasaMapper.swift */; };
 		C5091FA422F5719100DA6866 /* NasaResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FA322F5719100DA6866 /* NasaResponse.swift */; };
 		C5091FA722F5720A00DA6866 /* NasaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FA622F5720A00DA6866 /* NasaItem.swift */; };
+		C5091FAA22F5778C00DA6866 /* NasaDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FA922F5778C00DA6866 /* NasaDetailsViewController.swift */; };
+		C5091FAC22F5779700DA6866 /* NasaDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5091FAB22F5779700DA6866 /* NasaDetailsViewModel.swift */; };
 		C50D64DB22F4C00400E7A218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64DA22F4C00400E7A218 /* AppDelegate.swift */; };
-		C50D64DD22F4C00400E7A218 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64DC22F4C00400E7A218 /* ImagesListViewController.swift */; };
+		C50D64DD22F4C00400E7A218 /* NasaItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64DC22F4C00400E7A218 /* NasaItemsViewController.swift */; };
 		C50D64E022F4C00400E7A218 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C50D64DE22F4C00400E7A218 /* Main.storyboard */; };
 		C50D64E222F4C00500E7A218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C50D64E122F4C00500E7A218 /* Assets.xcassets */; };
 		C50D64E522F4C00500E7A218 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C50D64E322F4C00500E7A218 /* LaunchScreen.storyboard */; };
-		C50D64EF22F4C19A00E7A218 /* ImagesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64EE22F4C19A00E7A218 /* ImagesListViewModel.swift */; };
+		C50D64EF22F4C19A00E7A218 /* NasaItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64EE22F4C19A00E7A218 /* NasaItemsViewModel.swift */; };
 		C50D64F522F4C1E300E7A218 /* NasaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64F422F4C1E300E7A218 /* NasaService.swift */; };
 		C50D64F722F4C2A000E7A218 /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64F622F4C2A000E7A218 /* AppFlow.swift */; };
 		C50D64F922F4C2C600E7A218 /* AppStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64F822F4C2C600E7A218 /* AppStep.swift */; };
@@ -33,14 +35,16 @@
 		C5091FA122F5712B00DA6866 /* NasaMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaMapper.swift; sourceTree = "<group>"; };
 		C5091FA322F5719100DA6866 /* NasaResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NasaResponse.swift; sourceTree = "<group>"; };
 		C5091FA622F5720A00DA6866 /* NasaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaItem.swift; sourceTree = "<group>"; };
+		C5091FA922F5778C00DA6866 /* NasaDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaDetailsViewController.swift; sourceTree = "<group>"; };
+		C5091FAB22F5779700DA6866 /* NasaDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaDetailsViewModel.swift; sourceTree = "<group>"; };
 		C50D64D722F4C00400E7A218 /* nasaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nasaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C50D64DA22F4C00400E7A218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C50D64DC22F4C00400E7A218 /* ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewController.swift; sourceTree = "<group>"; };
+		C50D64DC22F4C00400E7A218 /* NasaItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaItemsViewController.swift; sourceTree = "<group>"; };
 		C50D64DF22F4C00400E7A218 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C50D64E122F4C00500E7A218 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C50D64E422F4C00500E7A218 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C50D64E622F4C00500E7A218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C50D64EE22F4C19A00E7A218 /* ImagesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewModel.swift; sourceTree = "<group>"; };
+		C50D64EE22F4C19A00E7A218 /* NasaItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaItemsViewModel.swift; sourceTree = "<group>"; };
 		C50D64F422F4C1E300E7A218 /* NasaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaService.swift; sourceTree = "<group>"; };
 		C50D64F622F4C2A000E7A218 /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
 		C50D64F822F4C2C600E7A218 /* AppStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStep.swift; sourceTree = "<group>"; };
@@ -95,6 +99,15 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		C5091FA822F5776E00DA6866 /* NasaDetails */ = {
+			isa = PBXGroup;
+			children = (
+				C5091FA922F5778C00DA6866 /* NasaDetailsViewController.swift */,
+				C5091FAB22F5779700DA6866 /* NasaDetailsViewModel.swift */,
+			);
+			path = NasaDetails;
+			sourceTree = "<group>";
+		};
 		C50D64CE22F4C00400E7A218 = {
 			isa = PBXGroup;
 			children = (
@@ -134,18 +147,19 @@
 		C50D64EC22F4C15800E7A218 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				C50D64ED22F4C16800E7A218 /* ImagesList */,
+				C5091FA822F5776E00DA6866 /* NasaDetails */,
+				C50D64ED22F4C16800E7A218 /* NasaItems */,
 			);
 			path = Features;
 			sourceTree = "<group>";
 		};
-		C50D64ED22F4C16800E7A218 /* ImagesList */ = {
+		C50D64ED22F4C16800E7A218 /* NasaItems */ = {
 			isa = PBXGroup;
 			children = (
-				C50D64DC22F4C00400E7A218 /* ImagesListViewController.swift */,
-				C50D64EE22F4C19A00E7A218 /* ImagesListViewModel.swift */,
+				C50D64DC22F4C00400E7A218 /* NasaItemsViewController.swift */,
+				C50D64EE22F4C19A00E7A218 /* NasaItemsViewModel.swift */,
 			);
-			path = ImagesList;
+			path = NasaItems;
 			sourceTree = "<group>";
 		};
 		C50D64F222F4C1C900E7A218 /* Navigation */ = {
@@ -295,15 +309,17 @@
 			files = (
 				C50D64F522F4C1E300E7A218 /* NasaService.swift in Sources */,
 				C50D64F922F4C2C600E7A218 /* AppStep.swift in Sources */,
-				C50D64DD22F4C00400E7A218 /* ImagesListViewController.swift in Sources */,
+				C50D64DD22F4C00400E7A218 /* NasaItemsViewController.swift in Sources */,
+				C5091FAA22F5778C00DA6866 /* NasaDetailsViewController.swift in Sources */,
 				C50D64DB22F4C00400E7A218 /* AppDelegate.swift in Sources */,
 				C5091FA422F5719100DA6866 /* NasaResponse.swift in Sources */,
 				C50D64F722F4C2A000E7A218 /* AppFlow.swift in Sources */,
 				C50D64FF22F4CC2200E7A218 /* ApiProvider.swift in Sources */,
 				C5091FA722F5720A00DA6866 /* NasaItem.swift in Sources */,
 				C50D64FB22F4C30800E7A218 /* NasaFlow.swift in Sources */,
-				C50D64EF22F4C19A00E7A218 /* ImagesListViewModel.swift in Sources */,
+				C50D64EF22F4C19A00E7A218 /* NasaItemsViewModel.swift in Sources */,
 				C50D650222F4DD0700E7A218 /* ImageCell.swift in Sources */,
+				C5091FAC22F5779700DA6866 /* NasaDetailsViewModel.swift in Sources */,
 				C5091FA222F5712B00DA6866 /* NasaMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

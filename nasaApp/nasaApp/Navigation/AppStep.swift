@@ -11,5 +11,5 @@ enum AppStep: Step {
 
 	// Member
 	case imagesList
-	case detail
+	case detail(NasaItem)
 }

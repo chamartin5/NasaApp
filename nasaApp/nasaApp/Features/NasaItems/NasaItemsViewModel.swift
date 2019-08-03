@@ -13,42 +13,47 @@ import Moya
 import Result
 import RxDataSources
 
-typealias ImagesSectionModel = SectionModel<String, NasaItem>
+typealias NasaSectionModel = SectionModel<String, NasaItem>
 
-class ImagesListViewModel: Stepper {
+class NasaItemsViewModel: Stepper {
 	let steps = PublishRelay<Step>()
 	private let disposeBag = DisposeBag()
 	private let apiProvider = APIProvider(provider: MoyaProvider<NasaService>())
 
 	struct Input {
-
+		let tapOnCell: AnyObserver<NasaItem>
 	}
 
 	struct Output {
-		let sections: Observable<[ImagesSectionModel]>
+		let sections: Observable<[NasaSectionModel]>
 	}
 
 	let input: Input
 	let output: Output
 
-	private let outputSections = ReplaySubject<[ImagesSectionModel]>.create(bufferSize: 1)
+	private let tapOnCellSubject = PublishSubject<NasaItem>()
+	private let sectionsSubject = ReplaySubject<[NasaSectionModel]>.create(bufferSize: 1)
 
 	init() {
-		self.input = Input()
-		self.output = Output(sections: outputSections.asObservable())
+		self.input = Input(tapOnCell: tapOnCellSubject.asObserver())
+		self.output = Output(sections: sectionsSubject.asObservable())
 		setupBindings()
 	}
 }
 
-private extension ImagesListViewModel {
-
+private extension NasaItemsViewModel {
 	func setupBindings() {
+		bindSections()
+		bindTapOnCell()
+	}
+
+	func bindSections() {
 		apiProvider.getDetail()
-			.map { result -> ImagesSectionModel? in
+			.map { result -> NasaSectionModel? in
 				switch result {
 				case .success(let nasaItems):
 					let firstTwentyItems = Array(nasaItems.prefix(20))
-					return ImagesSectionModel.init(model: "", items: firstTwentyItems)
+					return NasaSectionModel.init(model: "", items: firstTwentyItems)
 				case .failure:
 					return nil
 				}
@@ -56,8 +61,17 @@ private extension ImagesListViewModel {
 			.asObservable()
 			.subscribe(onNext: { [weak self] imagesSectionModel in
 				guard let self = self, let imagesSectionModel = imagesSectionModel else { return }
-				self.outputSections.onNext([imagesSectionModel])
+				self.sectionsSubject.onNext([imagesSectionModel])
 			})
+			.disposed(by: disposeBag)
+	}
+
+	func bindTapOnCell() {
+		tapOnCellSubject
+			.map { item -> AppStep in
+				return AppStep.detail(item)
+			}
+			.bind(to: steps)
 			.disposed(by: disposeBag)
 	}
 }
