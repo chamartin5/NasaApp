@@ -9,8 +9,8 @@
 import Foundation
 
 final class NasaMapper {
-	static func mapFromWS(_ response: NasaResponse) -> [NasaItem] {
-		return response.collection.items.map { nasaResponseItem -> NasaItem? in
+	static func mapFromWS(_ response: [ItemResponse]) -> [NasaItem] {
+		return response.map { nasaResponseItem -> NasaItem? in
 			guard let data = nasaResponseItem.data.first, let linkData = nasaResponseItem.links.first else { return nil }
 			let createdDate = DateFormatter.iso8601.date(from: data.createdDate)
 			return NasaItem(center: data.center,

@@ -41,6 +41,7 @@ class NasaItemsViewModel: Stepper {
 	}
 }
 
+// MARK: bindings
 private extension NasaItemsViewModel {
 	func setupBindings() {
 		bindSections()
@@ -50,12 +51,12 @@ private extension NasaItemsViewModel {
 	func bindSections() {
 		nasaApiProvider.getNasaImagesDetail()
 			.asObservable()
-			.flatMap { result -> Observable<[NasaSectionModel]> in
+			.flatMap { [weak self] result -> Observable<[NasaSectionModel]> in
 				switch result {
-				case .success(let nasaItems):
-					let firstTwentyItems = Array(nasaItems.prefix(20))
-					let sectionModel = NasaSectionModel.init(model: "", items: firstTwentyItems)
-					return Observable.just([sectionModel])
+				case .success(let nasaResponse):
+					guard let self = self else { return Observable.never() }
+					let sectionModel = self.buildSectionModel(nasaResponse: nasaResponse)
+					return Observable.just(sectionModel)
 				case .failure:
 					return Observable.never()
 				}
@@ -71,5 +72,15 @@ private extension NasaItemsViewModel {
 			}
 			.bind(to: steps)
 			.disposed(by: disposeBag)
+	}
+}
+
+// MARK: build sectionModel
+private extension NasaItemsViewModel {
+	func buildSectionModel(nasaResponse: NasaResponse) -> [NasaSectionModel] {
+		let firstTwentyItems = Array(nasaResponse.collection.items.prefix(20))
+		let items = NasaMapper.mapFromWS(firstTwentyItems)
+		let sectionModel = NasaSectionModel.init(model: "", items: items)
+		return [sectionModel]
 	}
 }

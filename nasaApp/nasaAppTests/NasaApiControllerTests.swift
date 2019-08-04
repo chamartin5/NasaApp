@@ -31,19 +31,22 @@ class NasaApiControllerTests: XCTestCase {
     }
 
 	func testGetNasaImagesDetail() {
-		nasaApiProvider.getNasaImagesDetail().asObservable()
+		nasaApiProvider.getNasaImagesDetail()
+			.asObservable()
 			.subscribe(onNext: { result in
 				switch result {
-				case .success(let items):
-					XCTAssertEqual(items.count, 3, "getDetail expected 3 items")
-					guard let firstItem = items.first else { return XCTFail("first item is nil") }
-					XCTAssertEqual("MSFC", firstItem.center, "center incorrectly mapped")
-					XCTAssertEqual("Microgravity", firstItem.title, "title incorrectly mapped")
-					XCTAssertEqual("Space Vacuum Epitaxy Center works", firstItem.description, "description incorrectly mapped")
-					XCTAssertEqual(DateFormatter.iso8601.date(from: "1999-11-10T00:00:00Z"), firstItem.createdDate, "createdDate incorrectly mapped")
-					XCTAssertEqual(1, firstItem.keywords.count, "keywords incorrectly mapped")
-					XCTAssertEqual("0000485", firstItem.nasaId, "nasaId incorrectly mapped")
-					XCTAssertEqual("https://images-assets.nasa.gov/image/0000485/0000485~thumb.jpg", firstItem.imageUrl?.absoluteString)
+				case .success(let nasaResponse):
+					XCTAssertEqual(nasaResponse.collection.items.count, 3, "getNasaImagesDetail expected 3 items")
+					guard let firstItem = nasaResponse.collection.items.first,
+						let firstData = firstItem.data.first,
+						let firstLink = firstItem.links.first  else { return XCTFail("first item, data or link is nil") }
+					XCTAssertEqual(firstData.center, "MSFC", "center incorrectly mapped")
+					XCTAssertEqual(firstData.title, "Microgravity", "title incorrectly mapped")
+					XCTAssertEqual(firstData.description, "Space Vacuum Epitaxy Center works", "description incorrectly mapped")
+					XCTAssertEqual(firstData.createdDate, "1999-11-10T00:00:00Z", "date incorrectly mapped")
+					XCTAssertEqual(firstData.keywords.count, 1, "keywords incorrectly mapped")
+					XCTAssertEqual(firstData.nasaId, "0000485", "nasaId incorrectly mapped")
+					XCTAssertEqual(firstLink.href, "https://images-assets.nasa.gov/image/0000485/0000485~thumb.jpg", "href incorrectly mapped")
 				case .failure(let error):
 					XCTFail("getDetail in error \(error)")
 				}

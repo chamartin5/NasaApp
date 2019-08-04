@@ -22,14 +22,13 @@ class NasaAPIProvider {
 		self.provider = provider
 	}
 
-	public func getNasaImagesDetail() -> Single<Result<[NasaItem], ImageError>> {
+	public func getNasaImagesDetail() -> Single<Result<NasaResponse, ImageError>> {
 		return provider.rx.request(.all)
 			.map(NasaResponse.self)
-			.map { nasaReponse -> Result<[NasaItem], ImageError> in
-				let items = NasaMapper.mapFromWS(nasaReponse)
-				return .success(items)
+			.map { nasaReponse -> Result<NasaResponse, ImageError> in
+				return .success(nasaReponse)
 			}
-			.catchError { error -> Single<Result<[NasaItem], ImageError>> in
+			.catchError { error -> Single<Result<NasaResponse, ImageError>> in
 				return Single.just(.failure(.failGetImages))
 		}
 	}

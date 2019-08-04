@@ -37,24 +37,26 @@ class NasaItemsViewModelTests: XCTestCase {
 	}
 
 	func testGetNasaImagesDetail() {
-		nasaItemsViewModel.output.sections
-			.subscribe(onNext: { sectionModel in
-				XCTAssertEqual(sectionModel.count, 1)
-				guard let firstSection = sectionModel.first else { return XCTFail("section has no first item") }
-				XCTAssertEqual(firstSection.model, "")
-				XCTAssertEqual(firstSection.items.count, 3)
-			})
-			.disposed(by: disposeBag)
-	}
+		let sectionsListener = scheduler.createObserver([NasaSectionModel].self)
 
-	func testTapOnImageToDetail() {
 		nasaItemsViewModel.output.sections
-			.subscribe(onNext: { sectionModel in
-				XCTAssertEqual(sectionModel.count, 1)
-				guard let firstSection = sectionModel.first else { return XCTFail("section has no first item") }
-				XCTAssertEqual(firstSection.model, "")
-				XCTAssertEqual(firstSection.items.count, 3)
-			})
+			.bind(to: sectionsListener)
 			.disposed(by: disposeBag)
+
+		guard let sectionModels = sectionsListener.events[0].value.element else { return XCTFail("sectionModels is nil") }
+		XCTAssertEqual(sectionModels.count, 1)
+
+		let firstSection = sectionModels[0]
+		XCTAssertEqual(firstSection.model, "")
+		XCTAssertEqual(firstSection.items.count, 3)
+
+		let firstItem = firstSection.items[0]
+		XCTAssertEqual(firstItem.center, "MSFC", "center incorrectly mapped")
+		XCTAssertEqual(firstItem.title, "Microgravity", "title incorrectly mapped")
+		XCTAssertEqual(firstItem.description, "Space Vacuum Epitaxy Center works", "description incorrectly mapped")
+		XCTAssertEqual(firstItem.createdDate, DateFormatter.iso8601.date(from: "1999-11-10T00:00:00Z"), "createdDate incorrectly mapped")
+		XCTAssertEqual(firstItem.keywords.count, 1, "keywords incorrectly mapped")
+		XCTAssertEqual(firstItem.nasaId, "0000485", "nasaId incorrectly mapped")
+		XCTAssertEqual(firstItem.imageUrl?.absoluteString, "https://images-assets.nasa.gov/image/0000485/0000485~thumb.jpg", "imageUrl incorrectly mapped")
 	}
 }

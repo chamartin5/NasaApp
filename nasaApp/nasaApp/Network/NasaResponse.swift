@@ -9,19 +9,19 @@
 import Foundation
 
 public class NasaResponse: Codable {
-	let collection: Collection
+	let collection: CollectionResponse
 }
 
-struct Collection: Codable {
-	let items: [Item]
+struct CollectionResponse: Codable {
+	let items: [ItemResponse]
 }
 
-struct Item: Codable {
-	let data: [ImageData]
-	let links: [LinkData]
+struct ItemResponse: Codable {
+	let data: [ImageDataResponse]
+	let links: [LinkDataResponse]
 }
 
-class ImageData: Codable {
+class ImageDataResponse: Codable {
 	let center: String
 	let title: String
 	let description: String
@@ -49,6 +49,6 @@ class ImageData: Codable {
 	}
 }
 
-struct LinkData: Codable {
+struct LinkDataResponse: Codable {
 	let href: String
 }
