@@ -9,7 +9,6 @@
 import RxCocoa
 import RxSwift
 import RxFlow
-import Moya
 import Result
 import RxDataSources
 
@@ -50,20 +49,18 @@ private extension NasaItemsViewModel {
 
 	func bindSections() {
 		nasaApiProvider.getNasaImagesDetail()
-			.map { result -> NasaSectionModel? in
+			.asObservable()
+			.flatMap { result -> Observable<[NasaSectionModel]> in
 				switch result {
 				case .success(let nasaItems):
 					let firstTwentyItems = Array(nasaItems.prefix(20))
-					return NasaSectionModel.init(model: "", items: firstTwentyItems)
+					let sectionModel = NasaSectionModel.init(model: "", items: firstTwentyItems)
+					return Observable.just([sectionModel])
 				case .failure:
-					return nil
+					return Observable.never()
 				}
 			}
-			.asObservable()
-			.subscribe(onNext: { [weak self] imagesSectionModel in
-				guard let self = self, let imagesSectionModel = imagesSectionModel else { return }
-				self.sectionsSubject.onNext([imagesSectionModel])
-			})
+			.bind(to: sectionsSubject)
 			.disposed(by: disposeBag)
 	}
 
