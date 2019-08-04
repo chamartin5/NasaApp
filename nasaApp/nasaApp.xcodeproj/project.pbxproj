@@ -35,6 +35,8 @@
 		C50D64FF22F4CC2200E7A218 /* NasaAPIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D64FE22F4CC2200E7A218 /* NasaAPIProvider.swift */; };
 		C50D650222F4DD0700E7A218 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D650122F4DD0700E7A218 /* ImageCell.swift */; };
 		C50D650422F4DD1300E7A218 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C50D650322F4DD1300E7A218 /* ImageCell.xib */; };
+		C5C5C84F22F7788D00CDBB67 /* Nasa2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C5C84E22F7788D00CDBB67 /* Nasa2Service.swift */; };
+		C5C5C85122F778F000CDBB67 /* apod.json in Resources */ = {isa = PBXBuildFile; fileRef = C5C5C85022F778F000CDBB67 /* apod.json */; };
 		C5C603D222F6136000D83D28 /* NasaApiControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C603D122F6136000D83D28 /* NasaApiControllerTests.swift */; };
 		C5C603DB22F6185500D83D28 /* nasaImages.json in Resources */ = {isa = PBXBuildFile; fileRef = C5C603DA22F6185500D83D28 /* nasaImages.json */; };
 		C5C603FD22F62D6100D83D28 /* NasaFullSizeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C603FC22F62D6100D83D28 /* NasaFullSizeViewModelTests.swift */; };
@@ -90,6 +92,8 @@
 		C50D64FE22F4CC2200E7A218 /* NasaAPIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaAPIProvider.swift; sourceTree = "<group>"; };
 		C50D650122F4DD0700E7A218 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		C50D650322F4DD1300E7A218 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
+		C5C5C84E22F7788D00CDBB67 /* Nasa2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nasa2Service.swift; sourceTree = "<group>"; };
+		C5C5C85022F778F000CDBB67 /* apod.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = apod.json; sourceTree = "<group>"; };
 		C5C603CF22F6136000D83D28 /* nasaAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nasaAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5C603D122F6136000D83D28 /* NasaApiControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaApiControllerTests.swift; sourceTree = "<group>"; };
 		C5C603D322F6136000D83D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -262,6 +266,7 @@
 				C5091FA322F5719100DA6866 /* NasaResponse.swift */,
 				C50D64F422F4C1E300E7A218 /* NasaService.swift */,
 				C50D64FE22F4CC2200E7A218 /* NasaAPIProvider.swift */,
+				C5C5C84E22F7788D00CDBB67 /* Nasa2Service.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -291,6 +296,7 @@
 			children = (
 				C5091FAD22F5883300DA6866 /* Fonts */,
 				C5C603DA22F6185500D83D28 /* nasaImages.json */,
+				C5C5C85022F778F000CDBB67 /* apod.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -380,6 +386,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5C5C85122F778F000CDBB67 /* apod.json in Resources */,
 				C5091FB622F5886600DA6866 /* LiterataBook-Italic.otf in Resources */,
 				C50D64E522F4C00500E7A218 /* LaunchScreen.storyboard in Resources */,
 				C50D650422F4DD1300E7A218 /* ImageCell.xib in Resources */,
@@ -496,6 +503,7 @@
 				C50D64DB22F4C00400E7A218 /* AppDelegate.swift in Sources */,
 				C5091FC222F5DB0A00DA6866 /* NasaFullSizeViewController.swift in Sources */,
 				C5091FA422F5719100DA6866 /* NasaResponse.swift in Sources */,
+				C5C5C84F22F7788D00CDBB67 /* Nasa2Service.swift in Sources */,
 				C50D64F722F4C2A000E7A218 /* AppFlow.swift in Sources */,
 				C50D64FF22F4CC2200E7A218 /* NasaAPIProvider.swift in Sources */,
 				C5091FA722F5720A00DA6866 /* NasaItem.swift in Sources */,

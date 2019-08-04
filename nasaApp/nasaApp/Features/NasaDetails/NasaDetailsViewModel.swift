@@ -20,18 +20,18 @@ class NasaDetailsViewModel: Stepper {
 	}
 
 	struct Output {
-		let info: Observable<NasaItem>
+		let info: Observable<ApodItem>
 	}
 
-	let nasaItem: NasaItem
+	let apodItem: ApodItem
 	let input: Input
 	let output: Output
 
-	private let infoSubject = ReplaySubject<NasaItem>.create(bufferSize: 1)
+	private let infoSubject = ReplaySubject<ApodItem>.create(bufferSize: 1)
 	private let tapOnImageSubject = PublishSubject<Void>()
 
-	init(nasaItem: NasaItem) {
-		self.nasaItem = nasaItem
+	init(apodItem: ApodItem) {
+		self.apodItem = apodItem
 		self.input = Input(tapOnImage: tapOnImageSubject.asObserver())
 		self.output = Output(info: infoSubject.asObservable())
 		setupBindings()
@@ -45,7 +45,7 @@ private extension NasaDetailsViewModel {
 	}
 
 	func bindNasaInfo() {
-		Observable.just(nasaItem)
+		Observable.just(apodItem)
 			.bind(to: infoSubject)
 			.disposed(by: disposeBag)
 	}
@@ -54,7 +54,7 @@ private extension NasaDetailsViewModel {
 		tapOnImageSubject
 			.map { [weak self] _ -> AppStep? in
 				guard let self = self else { return nil }
-				return AppStep.nasaFullSize(self.nasaItem.imageUrl)
+				return AppStep.nasaFullSize(self.apodItem.url)
 			}
 			.subscribe(onNext: { [weak self] appStep in
 				guard let self = self, let appStep = appStep else { return }

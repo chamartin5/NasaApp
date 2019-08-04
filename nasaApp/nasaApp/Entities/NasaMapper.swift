@@ -23,4 +23,15 @@ final class NasaMapper {
 		}
 		.compactMap { $0 }
 	}
+
+	static func mapFromWS(_ responses: [ApodResponse]) -> [ApodItem] {
+		return responses.map({ response -> ApodItem in
+			let date = DateFormatter.dateFormatterWS.date(from: response.date)
+			return ApodItem(title: response.title,
+							description: response.explanation,
+							date: date,
+							url: URL(string: response.url)
+			)
+		})
+	}
 }

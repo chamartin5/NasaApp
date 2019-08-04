@@ -18,21 +18,22 @@ class NasaFlow: Flow {
 	func navigate(to step: Step) -> FlowContributors {
 		guard let step = step as? AppStep else { return .none }
 		switch step {
-		case .imagesList:
-			return navigateToImagesList()
-		case .detail(let nasaItem):
-			return navigateToNasaItem(nasaItem: nasaItem)
+		case .apodList:
+			return navigateToApodList()
+		case .apodDetails(let apodItem):
+			return navigateToApodDetails(apodItem: apodItem)
 		case .nasaFullSize(let url):
 			return navigateToNasaFullSize(url: url)
 		}
 	}
 
-	private func navigateToImagesList() -> FlowContributors {
+	private func navigateToApodList() -> FlowContributors {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaItemsViewController") as? NasaItemsViewController else {
 			return .none
 		}
-		let nasaApiProvider = NasaAPIProvider(provider: MoyaProvider<NasaService>())
+		let nasaApiProvider = NasaAPIProvider(provider: MoyaProvider<NasaService>(),
+											  provider2: MoyaProvider<Nasa2Service>())
 		let viewModel = NasaItemsViewModel(nasaApiProvider: nasaApiProvider)
 		viewController.viewModel = viewModel
 
@@ -40,12 +41,12 @@ class NasaFlow: Flow {
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}
 
-	private func navigateToNasaItem(nasaItem: NasaItem) -> FlowContributors {
+	private func navigateToApodDetails(apodItem: ApodItem) -> FlowContributors {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaDetailsViewController") as? NasaDetailsViewController else {
 			return .none
 		}
-		let viewModel = NasaDetailsViewModel(nasaItem: nasaItem)
+		let viewModel = NasaDetailsViewModel(apodItem: apodItem)
 		viewController.viewModel = viewModel
 
 		rootViewController.pushViewController(viewController, animated: true)

@@ -13,6 +13,7 @@ import SwifterSwift
 class ImageCell: UICollectionViewCell {
 	@IBOutlet weak var nasaImage: UIImageView! {
 		didSet {
+			nasaImage.contentMode = .scaleAspectFill
 			nasaImage.layer.masksToBounds = true
 			nasaImage.cornerRadius = 10
 		}

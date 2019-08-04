@@ -8,7 +8,7 @@
 import RxFlow
 
 enum AppStep: Step {
-	case imagesList
-	case detail(NasaItem)
+	case apodList
+	case apodDetails(ApodItem)
 	case nasaFullSize(URL?)
 }

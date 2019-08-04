@@ -73,7 +73,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="4ce-Ss-AQX">
-                                        <rect key="frame" x="0.0" y="375" width="375" height="168.5"/>
+                                        <rect key="frame" x="0.0" y="375" width="375" height="94.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="u7v-SF-mce">
                                                 <rect key="frame" x="30" y="0.0" width="315" height="49"/>
@@ -98,28 +98,9 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5Yq-SN-35N">
-                                                <rect key="frame" x="30" y="119.5" width="315" height="49"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rlI-Zz-xcU">
-                                                        <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a8M-di-ezY">
-                                                        <rect key="frame" x="0.0" y="28.5" width="42" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="5Yq-SN-35N" secondAttribute="trailing" constant="30" id="T5s-ac-8Yi"/>
                                             <constraint firstItem="u7v-SF-mce" firstAttribute="leading" secondItem="4ce-Ss-AQX" secondAttribute="leading" constant="30" id="ah7-bZ-KY7"/>
-                                            <constraint firstItem="5Yq-SN-35N" firstAttribute="leading" secondItem="4ce-Ss-AQX" secondAttribute="leading" constant="30" id="iH4-gy-Zmw"/>
                                             <constraint firstAttribute="trailing" secondItem="u7v-SF-mce" secondAttribute="trailing" constant="30" id="k8a-Lp-UNF"/>
                                             <constraint firstItem="PnY-fJ-rIa" firstAttribute="leading" secondItem="4ce-Ss-AQX" secondAttribute="leading" constant="30" id="lhH-qN-4dA"/>
                                             <constraint firstAttribute="trailing" secondItem="PnY-fJ-rIa" secondAttribute="trailing" constant="30" id="qei-Ba-eNz"/>
@@ -151,8 +132,6 @@
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="PnY-fJ-rIa" id="lGK-W5-wiY"/>
-                        <outlet property="keywordsLabel" destination="a8M-di-ezY" id="all-2O-FD1"/>
-                        <outlet property="keywordsTitleLabel" destination="rlI-Zz-xcU" id="7uG-Jc-5EZ"/>
                         <outlet property="nasaImage" destination="hZx-C7-18Y" id="UtO-15-qYs"/>
                         <outlet property="subtitleLabel" destination="Mu1-kC-ZhE" id="kwW-rA-T1W"/>
                         <outlet property="titleLabel" destination="Wln-9Z-cLj" id="usc-QP-NzT"/>

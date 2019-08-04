@@ -12,15 +12,13 @@ import Kingfisher
 import RxGesture
 
 class NasaDetailsViewController: UIViewController {
-	private enum Constants {
-		static let keywordsTitle = "Keywords"
-	}
 
 	var viewModel: NasaDetailsViewModel!
 	private let disposeBag = DisposeBag()
 
 	@IBOutlet private weak var nasaImage: UIImageView! {
 		didSet {
+			nasaImage.contentMode = .scaleAspectFill
 			nasaImage.layer.masksToBounds = true
 			nasaImage.cornerRadius = 10
 		}
@@ -48,20 +46,6 @@ class NasaDetailsViewController: UIViewController {
 		}
 	}
 
-	@IBOutlet private weak var keywordsTitleLabel: UILabel! {
-		didSet {
-			keywordsTitleLabel.text = Constants.keywordsTitle
-			keywordsTitleLabel.font = UIFont(name: FontHelper.bold, size: 15)
-		}
-	}
-
-	@IBOutlet private weak var keywordsLabel: UILabel! {
-		didSet {
-			keywordsLabel.numberOfLines = 0
-			keywordsLabel.font = UIFont(name: FontHelper.medium, size: 15)
-		}
-	}
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupBindings()
@@ -70,18 +54,17 @@ class NasaDetailsViewController: UIViewController {
 
 // MARK: UI
 private extension NasaDetailsViewController {
-	func configure(nasaItem: NasaItem) {
-		nasaImage.kf.setImage(with: nasaItem.imageUrl)
-		titleLabel.text = nasaItem.title
-		let dateStr = getDateString(date: nasaItem.createdDate)
-		subtitleLabel.text = "(\(nasaItem.center), \(dateStr))"
-		descriptionLabel.text = nasaItem.description
-		keywordsLabel.text = nasaItem.keywords.joined(separator: "\n")
+	func configure(apodItem: ApodItem) {
+		nasaImage.kf.setImage(with: apodItem.url)
+		titleLabel.text = apodItem.title
+		let dateStr = getDateString(date: apodItem.date)
+		subtitleLabel.text = "(\(dateStr))"
+		descriptionLabel.text = apodItem.description
 	}
 
 	func getDateString(date: Date?) -> String {
 		guard let date = date else { return "" }
-		let dateFormatter = DateFormatter.dateFormatterLong
+		let dateFormatter = DateFormatter.dateFormatterWS
 		return dateFormatter.string(from: date)
 	}
 }
@@ -95,9 +78,9 @@ private extension NasaDetailsViewController {
 
 	func bindInfos() {
 		viewModel.output.info
-			.subscribe(onNext: { [weak self] item in
+			.subscribe(onNext: { [weak self] apodItem in
 				guard let self = self else { return }
-				self.configure(nasaItem: item)
+				self.configure(apodItem: apodItem)
 			})
 			.disposed(by: disposeBag)
 	}

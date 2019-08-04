@@ -56,9 +56,9 @@ private extension NasaItemsViewController {
 
 	func setupDataSource() {
 		dataSource = RxCollectionViewSectionedReloadDataSource(
-			configureCell: { (_, collectionView, indexPath, data) -> UICollectionViewCell in
+			configureCell: { (_, collectionView, indexPath, item) -> UICollectionViewCell in
 				guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellId, for: indexPath) as? ImageCell else { return UICollectionViewCell() }
-				cell.configure(url: data.imageUrl)
+				cell.configure(url: item.url)
 				return cell
 		})
 
@@ -68,7 +68,7 @@ private extension NasaItemsViewController {
 	}
 
 	func setupTapOnCell() {
-		collectionView.rx.modelSelected(NasaItem.self)
+		collectionView.rx.modelSelected(ApodItem.self)
 			.bind(to: viewModel.input.tapOnCell)
 			.disposed(by: disposeBag)
 	}

@@ -22,4 +22,19 @@ extension DateFormatter {
 		dateFormatter.timeZone = .current
 		return dateFormatter
 	}()
+
+	static let dateFormatterAmerican: DateFormatter = {
+		let dateFormatter = DateFormatter()
+		dateFormatter.timeZone = TimeZone(abbreviation: "CDT")
+		dateFormatter.dateFormat = "yyyy-MM-dd"
+		return dateFormatter
+	}()
+
+	static let dateFormatterWS: DateFormatter = {
+		let dateFormatter = DateFormatter()
+		dateFormatter.timeZone = .current
+		dateFormatter.locale = .current
+		dateFormatter.dateFormat = "yyyy-MM-dd"
+		return dateFormatter
+	}()
 }

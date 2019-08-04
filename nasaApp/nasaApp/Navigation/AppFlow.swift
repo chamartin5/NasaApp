@@ -30,20 +30,20 @@ class AppFlow: Flow {
 	func navigate(to step: Step) -> FlowContributors {
 		guard let step = step as? AppStep else { return .none }
 		switch step {
-		case .imagesList:
-			return navigateToImagesList()
+		case .apodList:
+			return navigateToApodList()
 		default:
 			return .none
 		}
 	}
 
-	private func navigateToImagesList() -> FlowContributors {
+	private func navigateToApodList() -> FlowContributors {
 		let nasaFlow = NasaFlow()
 
 		Flows.whenReady(flow1: nasaFlow) { [weak self] root in
 			self?.rootWindow.rootViewController = root
 		}
-		return .one(flowContributor: .contribute(withNextPresentable: nasaFlow, withNextStepper: OneStepper(withSingleStep: AppStep.imagesList)))
+		return .one(flowContributor: .contribute(withNextPresentable: nasaFlow, withNextStepper: OneStepper(withSingleStep: AppStep.apodList)))
 	}
 }
 
@@ -53,7 +53,7 @@ class AppStepper: Stepper {
 
 	//    /// callback used to emit steps once the FlowCoordinator is ready to listen to them to contribute to the Flow
 	func readyToEmitSteps() {
-		steps.accept(AppStep.imagesList)
+		steps.accept(AppStep.apodList)
 	}
 }
 

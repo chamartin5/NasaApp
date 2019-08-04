@@ -17,3 +17,10 @@ public struct NasaItem {
 	let nasaId: String
 	let imageUrl: URL?
 }
+
+public struct ApodItem {
+	let title: String
+	let description: String
+	let date: Date?
+	let url: URL?
+}
