@@ -9,15 +9,15 @@
 import Foundation
 
 extension DateFormatter {
-	static var dateFormatterLong: DateFormatter = {
+	static let dateFormatterLong: DateFormatter = {
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = .current
-		dateFormatter.timeZone = .current
+		dateFormatter.locale = .current
 		dateFormatter.dateStyle = .long
 		return dateFormatter
 	}()
 
-	static var iso8601: ISO8601DateFormatter = {
+	static let iso8601: ISO8601DateFormatter = {
 		let dateFormatter = ISO8601DateFormatter()
 		dateFormatter.timeZone = .current
 		return dateFormatter

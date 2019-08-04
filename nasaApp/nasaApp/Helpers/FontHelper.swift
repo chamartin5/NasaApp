@@ -6,8 +6,6 @@
 //  Copyright © 2019 Charlotte Martin. All rights reserved.
 //
 
-import UIKit
-
 enum FontHelper {
 	static let bold = "LiterataBook-Bold"
 	static let italic = "LiterataBook-Italic"

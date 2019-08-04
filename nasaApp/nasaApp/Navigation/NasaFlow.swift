@@ -13,7 +13,7 @@ class NasaFlow: Flow {
 		return rootViewController
 	}
 
-	private let rootViewController = UINavigationController()
+	private var rootViewController = UINavigationController()
 
 	func navigate(to step: Step) -> FlowContributors {
 		guard let step = step as? AppStep else { return .none }
@@ -36,7 +36,7 @@ class NasaFlow: Flow {
 		let viewModel = NasaItemsViewModel(nasaApiProvider: nasaApiProvider)
 		viewController.viewModel = viewModel
 
-		self.rootViewController.pushViewController(viewController, animated: true)
+		rootViewController.pushViewController(viewController, animated: true)
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}
 
@@ -48,7 +48,7 @@ class NasaFlow: Flow {
 		let viewModel = NasaDetailsViewModel(nasaItem: nasaItem)
 		viewController.viewModel = viewModel
 
-		self.rootViewController.pushViewController(viewController, animated: true)
+		rootViewController.pushViewController(viewController, animated: true)
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}
 
@@ -60,7 +60,7 @@ class NasaFlow: Flow {
 		let viewModel = NasaFullSizeViewModel(url: url)
 		viewController.viewModel = viewModel
 
-		self.rootViewController.pushViewController(viewController, animated: true)
+		rootViewController.pushViewController(viewController, animated: true)
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}
 
@@ -72,8 +72,8 @@ class NasaFlow: Flow {
 		let viewModel = NasaFullSizeViewModel(url: url)
 		viewController.viewModel = viewModel
 
-		self.rootViewController.popViewController(animated: true)
-		self.rootViewController.present(viewController, animated: true, completion: nil)
+		rootViewController.popViewController(animated: true)
+		rootViewController.present(viewController, animated: true, completion: nil)
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}
 }

@@ -38,12 +38,12 @@ class AppFlow: Flow {
 	}
 
 	private func navigateToImagesList() -> FlowContributors {
-		let mamberFlow = NasaFlow()
+		let nasaFlow = NasaFlow()
 
-		Flows.whenReady(flow1: mamberFlow) { [weak self] root in
+		Flows.whenReady(flow1: nasaFlow) { [weak self] root in
 			self?.rootWindow.rootViewController = root
 		}
-		return .one(flowContributor: .contribute(withNextPresentable: mamberFlow, withNextStepper: OneStepper(withSingleStep: AppStep.imagesList)))
+		return .one(flowContributor: .contribute(withNextPresentable: nasaFlow, withNextStepper: OneStepper(withSingleStep: AppStep.imagesList)))
 	}
 }
 

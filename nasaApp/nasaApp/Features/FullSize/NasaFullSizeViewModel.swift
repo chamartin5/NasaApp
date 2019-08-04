@@ -25,11 +25,11 @@ class NasaFullSizeViewModel: Stepper {
 
 	let input: Input
 	let output: Output
-	private let urlSubject = ReplaySubject<URL?>.create(bufferSize: 1)
+	private let urlSubject = BehaviorRelay<URL?>.init(value: nil)
 
 	init(url: URL?) {
 		self.input = Input()
 		self.output = Output(url: urlSubject.asObservable())
-		urlSubject.onNext(url)
+		urlSubject.accept(url)
 	}
 }
