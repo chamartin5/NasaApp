@@ -1,5 +1,5 @@
 //
-//  NasaItem.swift
+//  ApodItem.swift
 //  nasaApp
 //
 //  Created by Charlotte Martin on 03/08/2019.
@@ -7,16 +7,6 @@
 //
 
 import Foundation
-
-public struct NasaItem {
-	let center: String
-	let title: String
-	let description: String
-	let createdDate: Date?
-	let keywords: [String]
-	let nasaId: String
-	let imageUrl: URL?
-}
 
 public struct ApodItem {
 	let title: String

@@ -48,15 +48,12 @@ class NasaItemsViewModelTests: XCTestCase {
 
 		let firstSection = sectionModels[0]
 		XCTAssertEqual(firstSection.model, "")
-		XCTAssertEqual(firstSection.items.count, 3)
+		XCTAssertEqual(firstSection.items.count, 30)
 
 		let firstItem = firstSection.items[0]
-		XCTAssertEqual(firstItem.center, "MSFC", "center incorrectly mapped")
-		XCTAssertEqual(firstItem.title, "Microgravity", "title incorrectly mapped")
-		XCTAssertEqual(firstItem.description, "Space Vacuum Epitaxy Center works", "description incorrectly mapped")
-		XCTAssertEqual(firstItem.createdDate, DateFormatter.iso8601.date(from: "1999-11-10T00:00:00Z"), "createdDate incorrectly mapped")
-		XCTAssertEqual(firstItem.keywords.count, 1, "keywords incorrectly mapped")
-		XCTAssertEqual(firstItem.nasaId, "0000485", "nasaId incorrectly mapped")
-		XCTAssertEqual(firstItem.imageUrl?.absoluteString, "https://images-assets.nasa.gov/image/0000485/0000485~thumb.jpg", "imageUrl incorrectly mapped")
+		XCTAssertEqual(firstItem.date, DateFormatter.dateFormatterWS.date(from: "2019-08-01"), "date incorrectly mapped")
+		XCTAssertEqual(firstItem.title, "Elements in the Aftermath", "title incorrectly mapped")
+		XCTAssertEqual(firstItem.description, "Massive stars spend their brief", "description incorrectly mapped")
+		XCTAssertEqual(firstItem.url?.absoluteString, "https://apod.nasa.gov/apod/image/1908/g292chandra.jpg", "url incorrectly mapped")
 	}
 }

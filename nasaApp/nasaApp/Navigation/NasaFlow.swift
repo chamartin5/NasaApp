@@ -32,8 +32,7 @@ class NasaFlow: Flow {
 		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaItemsViewController") as? NasaItemsViewController else {
 			return .none
 		}
-		let nasaApiProvider = NasaAPIProvider(provider: MoyaProvider<NasaService>(),
-											  provider2: MoyaProvider<Nasa2Service>())
+		let nasaApiProvider = NasaAPIProvider(provider: MoyaProvider<NasaService>())
 		let viewModel = NasaItemsViewModel(nasaApiProvider: nasaApiProvider)
 		viewController.viewModel = viewModel
 

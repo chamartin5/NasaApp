@@ -2,7 +2,7 @@
 //  NasaService.swift
 //  nasaApp
 //
-//  Created by Charlotte Martin on 02/08/2019.
+//  Created by Charlotte Martin on 04/08/2019.
 //  Copyright © 2019 Charlotte Martin. All rights reserved.
 //
 
@@ -10,17 +10,16 @@ import Moya
 
 public enum NasaService: TargetType {
 
-	static private let publicKey = "YOUR PUBLIC KEY"
-	static private let privateKey = "YOUR PRIVATE KEY"
+	static private let apiKey = "fv6pNsXF8ycuZY5wdA9utKTOg42JBcWa2V0DUMAl"
 
-	case all
+	case apod(String)
 
 	public var baseURL: URL {
-		return URL(string: "https://images-api.nasa.gov")!
+		return URL(string: "https://api.nasa.gov")!
 	}
 
 	public var path: String {
-		return "search"
+		return "planetary/apod"
 	}
 
 	public var method: Method {
@@ -28,14 +27,20 @@ public enum NasaService: TargetType {
 	}
 
 	public var sampleData: Data {
-		let data = getData(file: "nasaImages")
+		let data = getData(file: "apod")
 		return data
 	}
 
 	public var task: Task {
-		let params: [String: Any] = ["media_type": "image"]
-		return .requestParameters(parameters: params,
-								  encoding: URLEncoding.default)
+		switch self {
+		case .apod(let date):
+			let params: [String: Any] = ["api_key": NasaService.apiKey,
+										 "date": date,
+										 "hd": true
+			]
+			return .requestParameters(parameters: params,
+									  encoding: URLEncoding.default)
+		}
 	}
 
 	public var headers: [String : String]? {

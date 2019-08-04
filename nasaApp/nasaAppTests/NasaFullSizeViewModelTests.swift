@@ -24,8 +24,8 @@ class NasaFullSizeViewModelTests: XCTestCase {
 	override func setUp() {
 		super.setUp()
 		nasaFullSizeViewModel = NasaFullSizeViewModel(url: Constants.fakeUrl)
-		let nasaItem = NasaItem(center: "", title: "", description: "", createdDate: nil, keywords: [""], nasaId: "", imageUrl: Constants.fakeUrl)
-		nasaDetailsViewModel = NasaDetailsViewModel(nasaItem: nasaItem)
+		let apodItem = ApodItem(title: "", description: "", date: nil, url: Constants.fakeUrl)
+		nasaDetailsViewModel = NasaDetailsViewModel(apodItem: apodItem)
 		disposeBag = DisposeBag()
 		scheduler = TestScheduler(initialClock: 0)
 	}
