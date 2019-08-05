@@ -10,7 +10,7 @@ import RxFlow
 import RxSwift
 import RxCocoa
 
-class AppFlow: Flow {
+final class AppFlow: Flow {
 	var root: Presentable {
 		return rootViewController
 	}
@@ -44,16 +44,6 @@ class AppFlow: Flow {
 			self?.rootWindow.rootViewController = root
 		}
 		return .one(flowContributor: .contribute(withNextPresentable: nasaFlow, withNextStepper: OneStepper(withSingleStep: AppStep.apodList)))
-	}
-}
-
-class AppStepper: Stepper {
-	let steps = PublishRelay<Step>()
-	private let disposeBag = DisposeBag()
-
-	//    /// callback used to emit steps once the FlowCoordinator is ready to listen to them to contribute to the Flow
-	func readyToEmitSteps() {
-		steps.accept(AppStep.apodList)
 	}
 }
 

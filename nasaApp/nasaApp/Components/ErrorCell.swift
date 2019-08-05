@@ -9,12 +9,26 @@
 import UIKit
 
 class ErrorCell: UICollectionViewCell {
+	private enum Constants {
+		static let sadImageName = "sadblue"
+		static let videoImageName = "videoblue"
+	}
+
 	@IBOutlet weak var nasaImage: UIImageView! {
 		didSet {
-			nasaImage.backgroundColor = .gray
-			let image = UIImage(named: "sad")
-			nasaImage.image = image
 			nasaImage.contentMode = .scaleAspectFill
+			nasaImage.layer.masksToBounds = true
+			nasaImage.cornerRadius = 10
 		}
+	}
+
+	func configureError() {
+			let image = UIImage(named: Constants.sadImageName)
+			nasaImage.image = image
+	}
+
+	func configureIsVideo() {
+		let image = UIImage(named: Constants.videoImageName)
+		nasaImage.image = image
 	}
 }

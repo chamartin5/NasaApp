@@ -6,12 +6,12 @@
 //  Copyright © 2019 Charlotte Martin. All rights reserved.
 //
 
-import Foundation
 import RxFlow
 import RxCocoa
 import RxSwift
+import RxSwiftExt
 
-class NasaDetailsViewModel: Stepper {
+final class NasaDetailsViewModel: Stepper {
 	let steps = PublishRelay<Step>()
 	private let disposeBag = DisposeBag()
 
@@ -57,10 +57,8 @@ private extension NasaDetailsViewModel {
 				let apodUrl = ApodUrl(url: self.apodItem.url, hdUrl: self.apodItem.hdUrl)
 				return AppStep.nasaFullSize(apodUrl)
 			}
-			.subscribe(onNext: { [weak self] appStep in
-				guard let self = self, let appStep = appStep else { return }
-				self.steps.accept(appStep)
-			})
+			.unwrap()
+			.bind(to: steps)
 			.disposed(by: disposeBag)
 	}
 }

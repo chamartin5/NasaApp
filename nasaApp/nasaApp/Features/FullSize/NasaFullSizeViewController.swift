@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import RxSwift
 
-class NasaFullSizeViewController: UIViewController {
+final class NasaFullSizeViewController: UIViewController {
 	var viewModel: NasaFullSizeViewModel!
 	private let disposeBag = DisposeBag()
 

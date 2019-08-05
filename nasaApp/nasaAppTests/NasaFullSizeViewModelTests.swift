@@ -15,6 +15,7 @@ import RxTest
 class NasaFullSizeViewModelTests: XCTestCase {
 	enum Constants {
 		static let fakeUrl: URL? = URL(string: "https://images-assets.nasa.gov/image/0000485/0000485~thumb.jpg")
+		static let fakeHdUrl: URL? = URL(string: "https://hd-images-assets.nasa.gov/image/0000485/0000485~thumb.jpg")
 	}
 	private var nasaFullSizeViewModel: NasaFullSizeViewModel!
 	private var nasaDetailsViewModel: NasaDetailsViewModel!
@@ -23,8 +24,9 @@ class NasaFullSizeViewModelTests: XCTestCase {
 
 	override func setUp() {
 		super.setUp()
-		nasaFullSizeViewModel = NasaFullSizeViewModel(url: Constants.fakeUrl)
-		let apodItem = ApodItem(title: "", description: "", date: nil, url: Constants.fakeUrl)
+		let apodUrl = ApodUrl(url: Constants.fakeUrl, hdUrl: Constants.fakeHdUrl)
+		nasaFullSizeViewModel = NasaFullSizeViewModel(apodUrl: apodUrl)
+		let apodItem = ApodItem(title: "", description: "", date: nil, url: Constants.fakeUrl, hdUrl: Constants.fakeHdUrl)
 		nasaDetailsViewModel = NasaDetailsViewModel(apodItem: apodItem)
 		disposeBag = DisposeBag()
 		scheduler = TestScheduler(initialClock: 0)
@@ -40,17 +42,18 @@ class NasaFullSizeViewModelTests: XCTestCase {
 
     func testBindUrl() {
 		nasaFullSizeViewModel.output.url
-			.subscribe(onNext: { url in
-				XCTAssertEqual(url, Constants.fakeUrl)
+			.subscribe(onNext: { apodUrl in
+				XCTAssertEqual(apodUrl.url, Constants.fakeUrl)
+				XCTAssertEqual(apodUrl.hdUrl, Constants.fakeHdUrl)
 			})
 			.disposed(by: disposeBag)
     }
 
 	func testTapOnImage() {
-		let isShowingFullImage = scheduler.createObserver(URL?.self)
+		let apodUrlListener = scheduler.createObserver(ApodUrl.self)
 
 		nasaFullSizeViewModel.output.url
-			.bind(to: isShowingFullImage)
+			.bind(to: apodUrlListener)
 			.disposed(by: disposeBag)
 
 		scheduler.createColdObservable([.next(10, ())])
@@ -59,10 +62,12 @@ class NasaFullSizeViewModelTests: XCTestCase {
 
 		scheduler.start()
 
-		let events = isShowingFullImage.events
+		let events = apodUrlListener.events
 		XCTAssertEqual(events.count, 1)
-		XCTAssertEqual(isShowingFullImage.events, [.next(0, Constants.fakeUrl)])
-	}
 
+		guard let apodUrl = apodUrlListener.events[0].value.element else { return XCTFail("apodUrl is nil") }
+		XCTAssertEqual(apodUrl.hdUrl, Constants.fakeHdUrl, "no hdUrl")
+		XCTAssertEqual(apodUrl.url, Constants.fakeUrl, "no url")
+	}
 }
 

@@ -11,6 +11,7 @@ import Foundation
 enum ApodState {
 	case success(ApodItem)
 	case failure
+	case apodIsVideo
 }
 
 struct ApodItem {

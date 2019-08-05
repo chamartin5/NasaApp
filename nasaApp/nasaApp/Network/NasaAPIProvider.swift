@@ -6,13 +6,13 @@
 //  Copyright © 2019 Charlotte Martin. All rights reserved.
 //
 
-import Foundation
 import Moya
 import RxSwift
 import Result
 
 enum NasaError: Error {
 	case failGetApod(Error)
+	case apodIsVideo
 }
 
 class NasaAPIProvider {
@@ -22,15 +22,17 @@ class NasaAPIProvider {
 		self.provider = provider
 	}
 
-	public func getApod(date: String) -> Single<Result<ApodResponse, NasaError>> {
+	func getApod(date: String) -> Single<Result<ApodResponse, NasaError>> {
 		return provider.rx.request(.apod(date))
-			.map(ApodResponse.self)
-			.map { nasaReponse -> Result<ApodResponse, NasaError> in
-				return .success(nasaReponse)
+			.map { response -> Result<ApodResponse, NasaError> in
+				let decoder = JSONDecoder()
+				decoder.keyDecodingStrategy = .convertFromSnakeCase
+				do {
+					let apodResponse = try decoder.decode(ApodResponse.self, from: response.data)
+					return .success(apodResponse)
+				} catch {
+					return .failure(.failGetApod(error))
+				}
 			}
-			.catchError { error -> Single<Result<ApodResponse, NasaError>> in
-				print("error for date \(date) \(error)")
-				return Single.just(.failure(.failGetApod(error)))
-		}
 	}
 }

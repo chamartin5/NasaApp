@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxDataSources
 
-class NasaItemsViewController: UIViewController {
+final class NasaItemsViewController: UIViewController {
 	private enum Constants {
 		static let cellSuccessId = "ImageCell"
 		static let cellErrorId = "ErrorCell"
@@ -25,9 +25,9 @@ class NasaItemsViewController: UIViewController {
 	@IBOutlet private weak var collectionView: UICollectionView! {
 		didSet {
 			let cellSuccessId = Constants.cellSuccessId
-			collectionView.register(UINib.init(nibName: cellSuccessId, bundle: nil), forCellWithReuseIdentifier: cellSuccessId)
+			collectionView.register(UINib.init(nibName: cellSuccessId, bundle: Bundle.main), forCellWithReuseIdentifier: cellSuccessId)
 			let cellErrorId = Constants.cellErrorId
-			collectionView.register(UINib.init(nibName: cellErrorId, bundle: nil), forCellWithReuseIdentifier: cellErrorId)
+			collectionView.register(UINib.init(nibName: cellErrorId, bundle: Bundle.main), forCellWithReuseIdentifier: cellErrorId)
 			collectionView.rx.setDelegate(self).disposed(by: disposeBag)
 		}
 	}
@@ -58,6 +58,13 @@ private extension NasaItemsViewController {
 
 	func configureCellError(indexPath: IndexPath) -> UICollectionViewCell {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellErrorId, for: indexPath) as? ErrorCell else { return UICollectionViewCell() }
+		cell.configureError()
+		return cell
+	}
+
+	func configureCellIsVideo(indexPath: IndexPath) -> UICollectionViewCell {
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellErrorId, for: indexPath) as? ErrorCell else { return UICollectionViewCell() }
+		cell.configureIsVideo()
 		return cell
 	}
 }
@@ -66,6 +73,7 @@ private extension NasaItemsViewController {
 private extension NasaItemsViewController {
 	func  setupBindings() {
 		setupDataSource()
+		setupLoader()
 	}
 
 	func setupDataSource() {
@@ -77,6 +85,8 @@ private extension NasaItemsViewController {
 					return self.configureCellSuccess(indexPath: indexPath, apodItem: apodItem)
 				case .failure:
 					return self.configureCellError(indexPath: indexPath)
+				case .apodIsVideo:
+					return self.configureCellIsVideo(indexPath: indexPath)
 				}
 		})
 
@@ -91,6 +101,14 @@ private extension NasaItemsViewController {
 				return apodItem
 			}
 			.bind(to: viewModel.input.tapOnCell)
+			.disposed(by: disposeBag)
+	}
+
+	func setupLoader() {
+		viewModel.output.isLoading
+			.subscribe(onNext: { isLoading in
+				print("isLoading: \(isLoading)")
+			})
 			.disposed(by: disposeBag)
 	}
 }

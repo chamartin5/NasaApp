@@ -9,6 +9,7 @@ target 'nasaApp' do
   pod 'RxDataSources', '~> 3.1.0'
 	pod 'Kingfisher', '~> 4.0'
 	pod 'RxGesture'
+	pod 'RxSwiftExt', '~> 3.4.0'
 
 	target 'nasaAppTests' do
 		use_frameworks!

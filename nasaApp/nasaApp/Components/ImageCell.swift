@@ -11,6 +11,11 @@ import Kingfisher
 import SwifterSwift
 
 class ImageCell: UICollectionViewCell {
+
+	private enum Constants {
+		static let placeholderImageName = "nasablackandwhite"
+	}
+
 	@IBOutlet weak var nasaImage: UIImageView! {
 		didSet {
 			nasaImage.contentMode = .scaleAspectFill
@@ -20,7 +25,7 @@ class ImageCell: UICollectionViewCell {
 	}
 
 	func configure(url: URL?) {
-		let placeholder = UIImage(named: "nasablackandwhite")
+		let placeholder = UIImage(named: Constants.placeholderImageName)
 		nasaImage.kf.setImage(with: url, placeholder: placeholder)
 	}
 }

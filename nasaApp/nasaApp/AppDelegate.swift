@@ -24,7 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		// listening for the coordination mechanism is not mandatory, but can be useful
 		coordinator.rx.didNavigate.subscribe(onNext: { (flow, step) in
-			print ("did navigate to flow=\(flow) and step=\(step)")
+			#if DEBUG
+			print("did navigate to flow=\(flow) and step=\(step)")
+			#endif
 		}).disposed(by: self.disposeBag)
 
 		let appFlow = AppFlow(withWindow: window)

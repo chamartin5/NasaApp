@@ -8,30 +8,30 @@
 
 import Moya
 
-public enum NasaService: TargetType {
+enum NasaService: TargetType {
 
 	static private let apiKey = "fv6pNsXF8ycuZY5wdA9utKTOg42JBcWa2V0DUMAl"
 
 	case apod(String)
 
-	public var baseURL: URL {
+	var baseURL: URL {
 		return URL(string: "https://api.nasa.gov")!
 	}
 
-	public var path: String {
+	var path: String {
 		return "planetary/apod"
 	}
 
-	public var method: Method {
+	var method: Method {
 		return .get
 	}
 
-	public var sampleData: Data {
+	var sampleData: Data {
 		let data = getData(file: "apod")
 		return data
 	}
 
-	public var task: Task {
+	var task: Task {
 		switch self {
 		case .apod(let date):
 			let params: [String: Any] = ["api_key": NasaService.apiKey,
@@ -43,11 +43,11 @@ public enum NasaService: TargetType {
 		}
 	}
 
-	public var headers: [String : String]? {
+	var headers: [String : String]? {
 		return nil
 	}
 
-	public func getData (file: String) -> Data {
+	func getData (file: String) -> Data {
 		let fileExtension = "json"
 		guard let path = Bundle.main.path(forResource: file, ofType: fileExtension) else {
 			return Data()
@@ -57,7 +57,9 @@ public enum NasaService: TargetType {
 			let data = try Data(contentsOf: pathURL, options: .dataReadingMapped)
 			return data
 		} catch(let error) {
-			print(error)
+			#if DEBUG
+			print("error in getting json data\(error)")
+			#endif
 			return Data()
 		}
 	}

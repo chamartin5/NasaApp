@@ -41,6 +41,7 @@
 		C5C603D222F6136000D83D28 /* NasaApiControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C603D122F6136000D83D28 /* NasaApiControllerTests.swift */; };
 		C5C603FD22F62D6100D83D28 /* NasaFullSizeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C603FC22F62D6100D83D28 /* NasaFullSizeViewModelTests.swift */; };
 		C5C6040D22F6352B00D83D28 /* NasaItemsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C6040C22F6352B00D83D28 /* NasaItemsViewModelTests.swift */; };
+		C5F1A0E822F883250088561E /* AppStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F1A0E722F883250088561E /* AppStepper.swift */; };
 		D80D481380C1F79ED654F3D2 /* Pods_nasaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E3985163F0E0164A7B5681B /* Pods_nasaApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,7 @@
 		C5C603D322F6136000D83D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5C603FC22F62D6100D83D28 /* NasaFullSizeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaFullSizeViewModelTests.swift; sourceTree = "<group>"; };
 		C5C6040C22F6352B00D83D28 /* NasaItemsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NasaItemsViewModelTests.swift; sourceTree = "<group>"; };
+		C5F1A0E722F883250088561E /* AppStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStepper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +258,7 @@
 				C50D64F622F4C2A000E7A218 /* AppFlow.swift */,
 				C50D64F822F4C2C600E7A218 /* AppStep.swift */,
 				C50D64FA22F4C30800E7A218 /* NasaFlow.swift */,
+				C5F1A0E722F883250088561E /* AppStepper.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				C50D64DB22F4C00400E7A218 /* AppDelegate.swift in Sources */,
 				C5091FC222F5DB0A00DA6866 /* NasaFullSizeViewController.swift in Sources */,
 				C57FE0EF22F79C82007C9292 /* ErrorCell.swift in Sources */,
+				C5F1A0E822F883250088561E /* AppStepper.swift in Sources */,
 				C5091FA422F5719100DA6866 /* ApodResponse.swift in Sources */,
 				C5C5C84F22F7788D00CDBB67 /* NasaService.swift in Sources */,
 				C50D64F722F4C2A000E7A218 /* AppFlow.swift in Sources */,

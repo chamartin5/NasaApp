@@ -51,9 +51,15 @@ class NasaItemsViewModelTests: XCTestCase {
 		XCTAssertEqual(firstSection.items.count, 30)
 
 		let firstItem = firstSection.items[0]
-		XCTAssertEqual(firstItem.date, DateFormatter.dateFormatterWS.date(from: "2019-08-01"), "date incorrectly mapped")
-		XCTAssertEqual(firstItem.title, "Elements in the Aftermath", "title incorrectly mapped")
-		XCTAssertEqual(firstItem.description, "Massive stars spend their brief", "description incorrectly mapped")
-		XCTAssertEqual(firstItem.url?.absoluteString, "https://apod.nasa.gov/apod/image/1908/g292chandra.jpg", "url incorrectly mapped")
+		switch firstItem {
+		case .success(let apodItem):
+			XCTAssertEqual(apodItem.date, DateFormatter.dateFormatterWS.date(from: "2019-08-01"), "date incorrectly mapped")
+			XCTAssertEqual(apodItem.title, "Elements in the Aftermath", "title incorrectly mapped")
+			XCTAssertEqual(apodItem.description, "Massive stars spend their brief", "description incorrectly mapped")
+			XCTAssertEqual(apodItem.url?.absoluteString, "https://apod.nasa.gov/apod/image/1908/g292chandra.jpg", "url incorrectly mapped")
+		default:
+			return XCTFail("firstItem is not in success")
+		}
+
 	}
 }

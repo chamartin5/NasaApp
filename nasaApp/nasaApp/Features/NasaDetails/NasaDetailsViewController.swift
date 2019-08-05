@@ -11,7 +11,7 @@ import RxSwift
 import Kingfisher
 import RxGesture
 
-class NasaDetailsViewController: UIViewController {
+final class NasaDetailsViewController: UIViewController {
 
 	var viewModel: NasaDetailsViewModel!
 	private let disposeBag = DisposeBag()

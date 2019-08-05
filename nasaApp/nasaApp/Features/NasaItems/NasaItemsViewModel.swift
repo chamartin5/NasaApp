@@ -14,7 +14,7 @@ import RxDataSources
 
 typealias NasaSectionModel = SectionModel<String, ApodState>
 
-class NasaItemsViewModel: Stepper {
+final class NasaItemsViewModel: Stepper {
 	private let nasaApiProvider: NasaAPIProvider!
 	let steps = PublishRelay<Step>()
 	private let disposeBag = DisposeBag()
@@ -25,6 +25,7 @@ class NasaItemsViewModel: Stepper {
 
 	struct Output {
 		let sections: Observable<[NasaSectionModel]>
+		let isLoading: Observable<Bool>
 	}
 
 	let input: Input
@@ -32,11 +33,13 @@ class NasaItemsViewModel: Stepper {
 
 	private let tapOnCellSubject = PublishSubject<ApodItem>()
 	private let sectionsSubject = ReplaySubject<[NasaSectionModel]>.create(bufferSize: 1)
+	private let isLoadingSubject = ReplaySubject<Bool>.create(bufferSize: 1)
 
 	init(nasaApiProvider: NasaAPIProvider) {
 		self.nasaApiProvider = nasaApiProvider
 		self.input = Input(tapOnCell: tapOnCellSubject.asObserver())
-		self.output = Output(sections: sectionsSubject.asObservable())
+		self.output = Output(sections: sectionsSubject.asObservable(),
+							 isLoading: isLoadingSubject.asObserver())
 		setupBindings()
 	}
 }
@@ -44,11 +47,50 @@ class NasaItemsViewModel: Stepper {
 // MARK: bindings
 private extension NasaItemsViewModel {
 	func setupBindings() {
+		initLoaderBinding()
 		bindSections()
 		bindTapOnCell()
 	}
 
+	func initLoaderBinding() {
+		isLoadingSubject.onNext(true)
+	}
+
 	func bindSections() {
+		let lastDates = getLast30Dates()
+
+		Observable.from(lastDates)
+			.concatMap { [weak self] date -> Single<Result<ApodResponse, NasaError>> in
+				guard let self = self else { return Single.never() }
+				return self.nasaApiProvider.getApod(date: date)
+			}
+			.map { result -> ApodState in
+				switch result {
+				case .success(let apodResponse):
+					if apodResponse.mediaType == .image {
+						let apodItem = NasaMapper.mapFromWS(apodResponse)
+						return .success(apodItem)
+					} else {
+						return .apodIsVideo
+					}
+				case .failure:
+					return .failure
+				}
+			}
+			.toArray()
+			.map { [weak self] apodStates -> [NasaSectionModel]? in
+				guard let self = self else { return nil }
+				return self.buildSectionModel(apodStates: apodStates)
+			}
+			.unwrap()
+			.do(onNext: { [weak self] _ in
+				self?.isLoadingSubject.onNext(false)
+			})
+			.bind(to: sectionsSubject)
+			.disposed(by: disposeBag)
+	}
+
+	func bindSections0() {
 		let lastDates = getLast30Dates()
 		let observables = lastDates.map { date -> Observable<Result<ApodResponse, NasaError>> in
 			return nasaApiProvider.getApod(date: date).asObservable()
@@ -64,9 +106,9 @@ private extension NasaItemsViewModel {
 							let apodItem = NasaMapper.mapFromWS(apodResponse)
 							apodStates.append(.success(apodItem))
 						} else {
-							apodStates.append(.failure)
+							apodStates.append(.apodIsVideo)
 						}
-					case .failure(let error):
+					case .failure:
 						apodStates.append(.failure)
 					}
 				}

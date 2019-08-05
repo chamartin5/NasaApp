@@ -6,12 +6,11 @@
 //  Copyright © 2019 Charlotte Martin. All rights reserved.
 //
 
-import Foundation
 import RxFlow
 import RxCocoa
 import RxSwift
 
-class NasaFullSizeViewModel: Stepper {
+final class NasaFullSizeViewModel: Stepper {
 	let steps = PublishRelay<Step>()
 	private let disposeBag = DisposeBag()
 

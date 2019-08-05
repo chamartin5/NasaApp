@@ -8,7 +8,7 @@
 import RxFlow
 import Moya
 
-class NasaFlow: Flow {
+final class NasaFlow: Flow {
 	var root: Presentable {
 		return rootViewController
 	}
