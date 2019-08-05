@@ -7,7 +7,7 @@ It has 3 screens :
 - A tap on a picture will display the picture details.
 - A tap on a button of the 2nd screen will open the picture in high resolution modally *(the HD image can be long to load, so a loader is displayed)*
 
-## How to run the example?
+## How to run it
 1. Clone this repo
 2. Navigate to project folder
 3. Run pod install
