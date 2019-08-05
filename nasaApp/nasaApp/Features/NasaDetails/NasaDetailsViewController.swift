@@ -57,15 +57,9 @@ private extension NasaDetailsViewController {
 	func configure(apodItem: ApodItem) {
 		nasaImage.kf.setImage(with: apodItem.url)
 		titleLabel.text = apodItem.title
-		let dateStr = getDateString(date: apodItem.date)
+		let dateStr = DateHelper.getDateString(date: apodItem.date)
 		subtitleLabel.text = "(\(dateStr))"
 		descriptionLabel.text = apodItem.description
-	}
-
-	func getDateString(date: Date?) -> String {
-		guard let date = date else { return "" }
-		let dateFormatter = DateFormatter.dateFormatterWS
-		return dateFormatter.string(from: date)
 	}
 }
 

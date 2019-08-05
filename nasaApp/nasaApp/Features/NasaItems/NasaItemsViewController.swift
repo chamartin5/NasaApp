@@ -101,7 +101,7 @@ private extension NasaItemsViewController {
 				return apodItem
 			}
 			.bind(to: viewModel.input.tapOnCell)
-			.disposed(by: disposeBag)
+			.disposed(by: cell.disposeBag)
 	}
 
 	func setupLoader() {

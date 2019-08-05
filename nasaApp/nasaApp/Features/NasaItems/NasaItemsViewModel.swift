@@ -59,6 +59,8 @@ private extension NasaItemsViewModel {
 	func bindSections() {
 		let lastDates = getLast30Dates()
 
+		let initSectionModel = [NasaSectionModel.init(model: "", items: [])]
+
 		Observable.from(lastDates)
 			.concatMap { [weak self] date -> Single<Result<ApodResponse, NasaError>> in
 				guard let self = self else { return Single.never() }
@@ -77,11 +79,10 @@ private extension NasaItemsViewModel {
 					return .failure
 				}
 			}
-			.toArray()
-			.map { [weak self] apodStates -> [NasaSectionModel]? in
+			.withLatestFrom(sectionsSubject.startWith(initSectionModel), resultSelector: { [weak self] (newApodState, previousSection) -> [NasaSectionModel]? in
 				guard let self = self else { return nil }
-				return self.buildSectionModel(apodStates: apodStates)
-			}
+				return self.updateSectionModel(newApodState: newApodState, previousSection: previousSection)
+			})
 			.unwrap()
 			.do(onNext: { [weak self] _ in
 				self?.isLoadingSubject.onNext(false)
@@ -133,11 +134,19 @@ private extension NasaItemsViewModel {
 	}
 }
 
-// MARK: build sectionModel
+// MARK: helpers
 private extension NasaItemsViewModel {
 	func buildSectionModel(apodStates: [ApodState]) -> [NasaSectionModel] {
 		let sectionModel = NasaSectionModel.init(model: "", items: apodStates)
 		return [sectionModel]
+	}
+
+	func updateSectionModel(newApodState: ApodState, previousSection: [NasaSectionModel]) -> [NasaSectionModel] {
+		var newSection = previousSection[0]
+		var items = newSection.items
+		items.append(newApodState)
+		newSection.items = items
+		return [newSection]
 	}
 
 	func getLast30Dates() -> [String] {

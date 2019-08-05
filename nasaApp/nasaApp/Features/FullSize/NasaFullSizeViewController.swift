@@ -11,6 +11,11 @@ import Kingfisher
 import RxSwift
 
 final class NasaFullSizeViewController: UIViewController {
+
+	private enum Constants {
+		static let placeholderImage = "nasablackandwhite"
+	}
+
 	var viewModel: NasaFullSizeViewModel!
 	private let disposeBag = DisposeBag()
 
@@ -28,7 +33,7 @@ private extension NasaFullSizeViewController {
 		viewModel.output.url
 			.subscribe(onNext: { [weak self] apodUrl in
 				guard let self = self else { return }
-				let placeholder = UIImage(named: "nasablackandwhite")
+				let placeholder = UIImage(named: Constants.placeholderImage)
 				if let hdUrl = apodUrl.hdUrl {
 					self.nasaFullSizeImage.kf.setImage(with: hdUrl, placeholder: placeholder)
 				} else {
