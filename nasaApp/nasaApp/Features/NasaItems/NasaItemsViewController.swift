@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxDataSources
+import RxGesture
 
 final class NasaItemsViewController: UIViewController {
 	private enum Constants {
@@ -73,7 +74,6 @@ private extension NasaItemsViewController {
 private extension NasaItemsViewController {
 	func  setupBindings() {
 		setupDataSource()
-		setupLoader()
 	}
 
 	func setupDataSource() {
@@ -102,14 +102,6 @@ private extension NasaItemsViewController {
 			}
 			.bind(to: viewModel.input.tapOnCell)
 			.disposed(by: cell.disposeBag)
-	}
-
-	func setupLoader() {
-		viewModel.output.isLoading
-			.subscribe(onNext: { isLoading in
-				print("isLoading: \(isLoading)")
-			})
-			.disposed(by: disposeBag)
 	}
 }
 

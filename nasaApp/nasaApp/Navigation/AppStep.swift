@@ -11,4 +11,5 @@ enum AppStep: Step {
 	case apodList
 	case apodDetails(ApodItem)
 	case nasaFullSize(ApodUrl)
+	case closeModal
 }

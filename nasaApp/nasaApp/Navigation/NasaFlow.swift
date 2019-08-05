@@ -14,6 +14,7 @@ final class NasaFlow: Flow {
 	}
 
 	private let rootViewController = UINavigationController()
+	private let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
 	func navigate(to step: Step) -> FlowContributors {
 		guard let step = step as? AppStep else { return .none }
@@ -23,12 +24,14 @@ final class NasaFlow: Flow {
 		case .apodDetails(let apodItem):
 			return navigateToApodDetails(apodItem: apodItem)
 		case .nasaFullSize(let apodUrl):
-			return navigateToNasaFullSize(apodUrl: apodUrl)
+			return navigateToNasaFullSizeModally(apodUrl: apodUrl)
+		case .closeModal:
+			rootViewController.topViewController?.dismiss(animated: true, completion: nil)
+			return .none
 		}
 	}
 
 	private func navigateToApodList() -> FlowContributors {
-		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaItemsViewController") as? NasaItemsViewController else {
 			return .none
 		}
@@ -41,7 +44,6 @@ final class NasaFlow: Flow {
 	}
 
 	private func navigateToApodDetails(apodItem: ApodItem) -> FlowContributors {
-		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaDetailsViewController") as? NasaDetailsViewController else {
 			return .none
 		}
@@ -52,27 +54,13 @@ final class NasaFlow: Flow {
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}
 
-	private func navigateToNasaFullSize(apodUrl: ApodUrl) -> FlowContributors {
-		let storyboard = UIStoryboard(name: "Main", bundle: nil)
-		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaFullSizeViewController") as? NasaFullSizeViewController else {
-			return .none
-		}
-		let viewModel = NasaFullSizeViewModel(apodUrl: apodUrl)
-		viewController.viewModel = viewModel
-
-		rootViewController.pushViewController(viewController, animated: true)
-		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
-	}
-
 	func navigateToNasaFullSizeModally(apodUrl: ApodUrl) -> FlowContributors {
-		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaFullSizeViewController") as? NasaFullSizeViewController else {
 			return .none
 		}
 		let viewModel = NasaFullSizeViewModel(apodUrl: apodUrl)
 		viewController.viewModel = viewModel
 
-		rootViewController.popViewController(animated: true)
 		rootViewController.present(viewController, animated: true, completion: nil)
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}

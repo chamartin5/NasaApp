@@ -16,7 +16,7 @@ final class NasaDetailsViewModel: Stepper {
 	private let disposeBag = DisposeBag()
 
 	struct Input {
-		let tapOnImage: AnyObserver<Void>
+		let tapOnButton: AnyObserver<Void>
 	}
 
 	struct Output {
@@ -28,11 +28,11 @@ final class NasaDetailsViewModel: Stepper {
 	let output: Output
 
 	private let infoSubject = ReplaySubject<ApodItem>.create(bufferSize: 1)
-	private let tapOnImageSubject = PublishSubject<Void>()
+	private let tapOnButtonSubject = PublishSubject<Void>()
 
 	init(apodItem: ApodItem) {
 		self.apodItem = apodItem
-		self.input = Input(tapOnImage: tapOnImageSubject.asObserver())
+		self.input = Input(tapOnButton: tapOnButtonSubject.asObserver())
 		self.output = Output(info: infoSubject.asObservable())
 		setupBindings()
 	}
@@ -41,7 +41,7 @@ final class NasaDetailsViewModel: Stepper {
 private extension NasaDetailsViewModel {
 	func setupBindings() {
 		bindNasaInfo()
-		bindTapOnImage()
+		bindTapOnButton()
 	}
 
 	func bindNasaInfo() {
@@ -50,8 +50,8 @@ private extension NasaDetailsViewModel {
 			.disposed(by: disposeBag)
 	}
 
-	func bindTapOnImage() {
-		tapOnImageSubject
+	func bindTapOnButton() {
+		tapOnButtonSubject
 			.map { [weak self] _ -> AppStep? in
 				guard let self = self else { return nil }
 				let apodUrl = ApodUrl(url: self.apodItem.url, hdUrl: self.apodItem.hdUrl)

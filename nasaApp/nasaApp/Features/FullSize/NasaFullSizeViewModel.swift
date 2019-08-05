@@ -15,7 +15,7 @@ final class NasaFullSizeViewModel: Stepper {
 	private let disposeBag = DisposeBag()
 
 	struct Input {
-
+		let tapOnClose: AnyObserver<Void>
 	}
 
 	struct Output {
@@ -24,11 +24,37 @@ final class NasaFullSizeViewModel: Stepper {
 
 	let input: Input
 	let output: Output
+
+	let apodUrl: ApodUrl
+
 	private let urlSubject = ReplaySubject<ApodUrl>.create(bufferSize: 1)
+	private let tapOnCloseSubject = PublishSubject<Void>()
 
 	init(apodUrl: ApodUrl) {
-		self.input = Input()
+		self.apodUrl = apodUrl
+		self.input = Input(tapOnClose: tapOnCloseSubject.asObserver())
 		self.output = Output(url: urlSubject.asObservable())
+		setupBindings()
+	}
+}
+
+// MARK: bindings
+private extension NasaFullSizeViewModel {
+	func setupBindings() {
+		bindApodUrl()
+		bindTapOnClose()
+	}
+
+	func bindApodUrl() {
 		urlSubject.onNext(apodUrl)
+	}
+
+	func bindTapOnClose() {
+		tapOnCloseSubject
+			.map { _ -> AppStep in
+				return .closeModal
+			}
+			.bind(to: steps)
+			.disposed(by: disposeBag)
 	}
 }

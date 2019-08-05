@@ -12,4 +12,5 @@ ${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework
 ${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework
 ${BUILT_PRODUCTS_DIR}/RxSwiftExt/RxSwiftExt.framework
 ${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework
+${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework
 ${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework

@@ -25,7 +25,6 @@ final class NasaItemsViewModel: Stepper {
 
 	struct Output {
 		let sections: Observable<[NasaSectionModel]>
-		let isLoading: Observable<Bool>
 	}
 
 	let input: Input
@@ -33,13 +32,11 @@ final class NasaItemsViewModel: Stepper {
 
 	private let tapOnCellSubject = PublishSubject<ApodItem>()
 	private let sectionsSubject = ReplaySubject<[NasaSectionModel]>.create(bufferSize: 1)
-	private let isLoadingSubject = ReplaySubject<Bool>.create(bufferSize: 1)
 
 	init(nasaApiProvider: NasaAPIProvider) {
 		self.nasaApiProvider = nasaApiProvider
 		self.input = Input(tapOnCell: tapOnCellSubject.asObserver())
-		self.output = Output(sections: sectionsSubject.asObservable(),
-							 isLoading: isLoadingSubject.asObserver())
+		self.output = Output(sections: sectionsSubject.asObservable())
 		setupBindings()
 	}
 }
@@ -47,18 +44,12 @@ final class NasaItemsViewModel: Stepper {
 // MARK: bindings
 private extension NasaItemsViewModel {
 	func setupBindings() {
-		initLoaderBinding()
 		bindSections()
 		bindTapOnCell()
 	}
 
-	func initLoaderBinding() {
-		isLoadingSubject.onNext(true)
-	}
-
 	func bindSections() {
 		let lastDates = getLast30Dates()
-
 		let initSectionModel = [NasaSectionModel.init(model: "", items: [])]
 
 		Observable.from(lastDates)
@@ -84,9 +75,6 @@ private extension NasaItemsViewModel {
 				return self.updateSectionModel(newApodState: newApodState, previousSection: previousSection)
 			})
 			.unwrap()
-			.do(onNext: { [weak self] _ in
-				self?.isLoadingSubject.onNext(false)
-			})
 			.bind(to: sectionsSubject)
 			.disposed(by: disposeBag)
 	}

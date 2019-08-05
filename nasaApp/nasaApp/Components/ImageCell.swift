@@ -10,27 +10,24 @@ import UIKit
 import Kingfisher
 import SwifterSwift
 import RxSwift
+import Lottie
 
 class ImageCell: UICollectionViewCell {
 
 	public var disposeBag = DisposeBag()
 
-	private enum Constants {
-		static let placeholderImageName = "nasablackandwhite"
-	}
-
 	@IBOutlet weak var nasaImage: UIImageView! {
 		didSet {
-			nasaImage.backgroundColor = .red
 			nasaImage.contentMode = .scaleAspectFill
 			nasaImage.layer.masksToBounds = true
 			nasaImage.cornerRadius = 10
 		}
 	}
 
+	@IBOutlet weak var loaderContainer: UIView!
+
 	func configure(url: URL?) {
-		let placeholder = UIImage(named: Constants.placeholderImageName)
-		nasaImage.kf.setImage(with: url, placeholder: placeholder)
+		nasaImage.kf.setImage(with: url)
 	}
 
 	override func prepareForReuse() {

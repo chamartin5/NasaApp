@@ -9,12 +9,17 @@
 import UIKit
 import RxSwift
 import Kingfisher
-import RxGesture
 
 final class NasaDetailsViewController: UIViewController {
 
+	private enum Constants {
+		static let buttonText = "Voir l'image en HD 🚀"
+	}
+
 	var viewModel: NasaDetailsViewModel!
 	private let disposeBag = DisposeBag()
+
+
 
 	@IBOutlet private weak var nasaImage: UIImageView! {
 		didSet {
@@ -35,7 +40,7 @@ final class NasaDetailsViewController: UIViewController {
 		didSet {
 			subtitleLabel.numberOfLines = 0
 			subtitleLabel.font = UIFont(name: FontHelper.italic, size: 20)
-			subtitleLabel.textColor = .gray
+			subtitleLabel.textColor = ColorHelper.greyText
 		}
 	}
 
@@ -43,6 +48,17 @@ final class NasaDetailsViewController: UIViewController {
 		didSet {
 			descriptionLabel.numberOfLines = 0
 			descriptionLabel.font = UIFont(name: FontHelper.medium, size: 15)
+		}
+	}
+
+	@IBOutlet private weak var button: UIButton! {
+		didSet {
+			button.setTitleForAllStates(Constants.buttonText)
+			button.setTitleColorForAllStates(ColorHelper.blue)
+			button.titleLabel?.font = UIFont(name: FontHelper.bold, size: 15)
+			button.backgroundColor = ColorHelper.lightGrey
+			button.layer.masksToBounds = true
+			button.cornerRadius = 5
 		}
 	}
 
@@ -67,7 +83,7 @@ private extension NasaDetailsViewController {
 private extension NasaDetailsViewController {
 	func setupBindings() {
 		bindInfos()
-		bindTapOnImage()
+		bindTapOnButton()
 	}
 
 	func bindInfos() {
@@ -79,10 +95,9 @@ private extension NasaDetailsViewController {
 			.disposed(by: disposeBag)
 	}
 
-	func bindTapOnImage() {
-		nasaImage.rx.tapGesture().when(.recognized)
-			.map { _ in () }
-			.bind(to: viewModel.input.tapOnImage)
+	func bindTapOnButton() {
+		button.rx.tap
+			.bind(to: viewModel.input.tapOnButton)
 			.disposed(by: disposeBag)
 	}
 }
