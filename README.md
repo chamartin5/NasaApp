@@ -3,9 +3,13 @@ This app displays the last 30 photos of the Nasa API (Astronomy Picture of the D
 
 ## Features
 It has 3 screens :
-- The first displays the photo of the day of the last 30 days *(If the data returned by the API is a video, we will display a video logo :video_camera:)*
+- The first displays the photo of the day of the last 30 days 
+- A loader is on each cell
+- If the data returned by the API is a video, we will display a video logo :video_camera:)
+- If an error is returned, the cell will be a bomb :bomb:
 - A tap on a picture will display the picture details.
-- A tap on a button of the 2nd screen will open the picture in high resolution modally *(the HD image can be long to load, so a loader is displayed)*
+- A tap on a button of the 2nd screen will open the picture in high resolution modally 
+- the HD image can be long to load, so a loader is displayed)
 
 ## How to run it
 1. Clone this repo

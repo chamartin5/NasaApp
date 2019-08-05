@@ -15,6 +15,7 @@ final class NasaItemsViewController: UIViewController {
 	private enum Constants {
 		static let cellSuccessId = "ImageCell"
 		static let cellErrorId = "ErrorCell"
+		static let cellLoaderId = "LoaderCell"
 		static let spacing: CGFloat = 15
 		static let numberOfItemsPerRow: CGFloat = 3
 	}
@@ -29,6 +30,8 @@ final class NasaItemsViewController: UIViewController {
 			collectionView.register(UINib.init(nibName: cellSuccessId, bundle: Bundle.main), forCellWithReuseIdentifier: cellSuccessId)
 			let cellErrorId = Constants.cellErrorId
 			collectionView.register(UINib.init(nibName: cellErrorId, bundle: Bundle.main), forCellWithReuseIdentifier: cellErrorId)
+			let cellLoaderId = Constants.cellLoaderId
+			collectionView.register(UINib.init(nibName: cellLoaderId, bundle: Bundle.main), forCellWithReuseIdentifier: cellLoaderId)
 			collectionView.rx.setDelegate(self).disposed(by: disposeBag)
 		}
 	}
@@ -48,6 +51,12 @@ private extension NasaItemsViewController {
 		layout.minimumLineSpacing = Constants.spacing
 		layout.minimumInteritemSpacing = Constants.spacing
 		self.collectionView?.collectionViewLayout = layout
+	}
+
+	func configureLoadingCell(indexPath: IndexPath) -> UICollectionViewCell {
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellLoaderId, for: indexPath) as? LoaderCell else { return UICollectionViewCell() }
+		cell.playLoader()
+		return cell
 	}
 
 	func configureCellSuccess(indexPath: IndexPath, apodItem: ApodItem) -> UICollectionViewCell {
@@ -81,6 +90,8 @@ private extension NasaItemsViewController {
 			configureCell: { [weak self] (_, collectionView, indexPath, apodState) -> UICollectionViewCell in
 				guard let self = self else { return UICollectionViewCell() }
 				switch apodState {
+				case .loading:
+					return self.configureLoadingCell(indexPath: indexPath)
 				case .success(let apodItem):
 					return self.configureCellSuccess(indexPath: indexPath, apodItem: apodItem)
 				case .failure:

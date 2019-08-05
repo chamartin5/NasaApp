@@ -10,8 +10,8 @@ import UIKit
 
 class ErrorCell: UICollectionViewCell {
 	private enum Constants {
-		static let sadImageName = "sadblue"
-		static let videoImageName = "videoblue"
+		static let errorImageName = "bomb"
+		static let videoImageName = "video"
 	}
 
 	@IBOutlet weak var nasaImage: UIImageView! {
@@ -23,7 +23,7 @@ class ErrorCell: UICollectionViewCell {
 	}
 
 	func configureError() {
-			let image = UIImage(named: Constants.sadImageName)
+			let image = UIImage(named: Constants.errorImageName)
 			nasaImage.image = image
 	}
 

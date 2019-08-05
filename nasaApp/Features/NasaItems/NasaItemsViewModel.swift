@@ -49,8 +49,13 @@ private extension NasaItemsViewModel {
 	}
 
 	func bindSections() {
-		let lastDates = getLast30Dates()
-		let initSectionModel = [NasaSectionModel.init(model: "", items: [])]
+		let lastDates = getLast30Days()
+
+		let initialItems = lastDates.map { _ -> ApodState in
+			return .loading
+		}
+
+		let initSectionModel = [NasaSectionModel.init(model: "", items: initialItems)]
 
 		Observable.from(lastDates)
 			.concatMap { [weak self] date -> Single<Result<ApodResponse, NasaError>> in
@@ -80,7 +85,7 @@ private extension NasaItemsViewModel {
 	}
 
 	func bindSections0() {
-		let lastDates = getLast30Dates()
+		let lastDates = getLast30Days()
 		let observables = lastDates.map { date -> Observable<Result<ApodResponse, NasaError>> in
 			return nasaApiProvider.getApod(date: date).asObservable()
 		}
@@ -129,7 +134,7 @@ private extension NasaItemsViewModel {
 		return [sectionModel]
 	}
 
-	func updateSectionModel(newApodState: ApodState, previousSection: [NasaSectionModel]) -> [NasaSectionModel] {
+	func updateSectionModel0(newApodState: ApodState, previousSection: [NasaSectionModel]) -> [NasaSectionModel] {
 		var newSection = previousSection[0]
 		var items = newSection.items
 		items.append(newApodState)
@@ -137,7 +142,25 @@ private extension NasaItemsViewModel {
 		return [newSection]
 	}
 
-	func getLast30Dates() -> [String] {
+	func updateSectionModel(newApodState: ApodState, previousSection: [NasaSectionModel]) -> [NasaSectionModel] {
+		var newSection = previousSection[0]
+		var items = newSection.items
+
+		let firstLoaderIndex = items.firstIndex { apodState -> Bool in
+			apodState == ApodState.loading
+		}
+
+		if let firstLoaderIndex = firstLoaderIndex {
+			items[firstLoaderIndex] = newApodState
+		} else {
+			items.append(newApodState)
+		}
+
+		newSection.items = items
+		return [newSection]
+	}
+
+	func getLast30Days() -> [String] {
 		var currentDate = Date()
 		var dateArray: [String] = []
 
