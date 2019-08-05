@@ -26,9 +26,14 @@ class NasaFullSizeViewController: UIViewController {
 private extension NasaFullSizeViewController {
 	func setupBindings() {
 		viewModel.output.url
-			.subscribe(onNext: { [weak self] url in
+			.subscribe(onNext: { [weak self] apodUrl in
 				guard let self = self else { return }
-				self.nasaFullSizeImage.kf.setImage(with: url)
+				let placeholder = UIImage(named: "nasablackandwhite")
+				if let hdUrl = apodUrl.hdUrl {
+					self.nasaFullSizeImage.kf.setImage(with: hdUrl, placeholder: placeholder)
+				} else {
+					self.nasaFullSizeImage.kf.setImage(with: apodUrl.url, placeholder: placeholder)
+				}
 			})
 			.disposed(by: disposeBag)
 	}

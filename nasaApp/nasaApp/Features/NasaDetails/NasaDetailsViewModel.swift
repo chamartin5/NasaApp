@@ -54,7 +54,8 @@ private extension NasaDetailsViewModel {
 		tapOnImageSubject
 			.map { [weak self] _ -> AppStep? in
 				guard let self = self else { return nil }
-				return AppStep.nasaFullSize(self.apodItem.url)
+				let apodUrl = ApodUrl(url: self.apodItem.url, hdUrl: self.apodItem.hdUrl)
+				return AppStep.nasaFullSize(apodUrl)
 			}
 			.subscribe(onNext: { [weak self] appStep in
 				guard let self = self, let appStep = appStep else { return }

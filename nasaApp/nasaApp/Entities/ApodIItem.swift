@@ -8,9 +8,22 @@
 
 import Foundation
 
-public struct ApodItem {
+enum ApodState {
+	case success(ApodItem)
+	case failure
+}
+
+struct ApodItem {
 	let title: String
 	let description: String
 	let date: Date?
 	let url: URL?
+	let hdUrl: URL?
 }
+
+struct ApodUrl {
+	let url: URL?
+	let hdUrl: URL?
+}
+
+

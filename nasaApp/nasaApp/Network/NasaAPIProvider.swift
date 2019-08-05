@@ -29,6 +29,7 @@ class NasaAPIProvider {
 				return .success(nasaReponse)
 			}
 			.catchError { error -> Single<Result<ApodResponse, NasaError>> in
+				print("error for date \(date) \(error)")
 				return Single.just(.failure(.failGetApod(error)))
 		}
 	}

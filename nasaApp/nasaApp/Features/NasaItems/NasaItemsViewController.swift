@@ -12,7 +12,8 @@ import RxDataSources
 
 class NasaItemsViewController: UIViewController {
 	private enum Constants {
-		static let cellId = "ImageCell"
+		static let cellSuccessId = "ImageCell"
+		static let cellErrorId = "ErrorCell"
 		static let spacing: CGFloat = 15
 		static let numberOfItemsPerRow: CGFloat = 3
 	}
@@ -23,8 +24,10 @@ class NasaItemsViewController: UIViewController {
 
 	@IBOutlet private weak var collectionView: UICollectionView! {
 		didSet {
-			let cellId = Constants.cellId
-			collectionView.register(UINib.init(nibName: cellId, bundle: nil), forCellWithReuseIdentifier: cellId)
+			let cellSuccessId = Constants.cellSuccessId
+			collectionView.register(UINib.init(nibName: cellSuccessId, bundle: nil), forCellWithReuseIdentifier: cellSuccessId)
+			let cellErrorId = Constants.cellErrorId
+			collectionView.register(UINib.init(nibName: cellErrorId, bundle: nil), forCellWithReuseIdentifier: cellErrorId)
 			collectionView.rx.setDelegate(self).disposed(by: disposeBag)
 		}
 	}
@@ -45,21 +48,36 @@ private extension NasaItemsViewController {
 		layout.minimumInteritemSpacing = Constants.spacing
 		self.collectionView?.collectionViewLayout = layout
 	}
+
+	func configureCellSuccess(indexPath: IndexPath, apodItem: ApodItem) -> UICollectionViewCell {
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellSuccessId, for: indexPath) as? ImageCell else { return UICollectionViewCell() }
+		cell.configure(url: apodItem.url)
+		setupTapOnCell(cell: cell, apodItem: apodItem)
+		return cell
+	}
+
+	func configureCellError(indexPath: IndexPath) -> UICollectionViewCell {
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellErrorId, for: indexPath) as? ErrorCell else { return UICollectionViewCell() }
+		return cell
+	}
 }
 
 // MARK: bindings
 private extension NasaItemsViewController {
 	func  setupBindings() {
 		setupDataSource()
-		setupTapOnCell()
 	}
 
 	func setupDataSource() {
 		dataSource = RxCollectionViewSectionedReloadDataSource(
-			configureCell: { (_, collectionView, indexPath, item) -> UICollectionViewCell in
-				guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellId, for: indexPath) as? ImageCell else { return UICollectionViewCell() }
-				cell.configure(url: item.url)
-				return cell
+			configureCell: { [weak self] (_, collectionView, indexPath, apodState) -> UICollectionViewCell in
+				guard let self = self else { return UICollectionViewCell() }
+				switch apodState {
+				case .success(let apodItem):
+					return self.configureCellSuccess(indexPath: indexPath, apodItem: apodItem)
+				case .failure:
+					return self.configureCellError(indexPath: indexPath)
+				}
 		})
 
 		viewModel.output.sections
@@ -67,8 +85,11 @@ private extension NasaItemsViewController {
 			.disposed(by: disposeBag)
 	}
 
-	func setupTapOnCell() {
-		collectionView.rx.modelSelected(ApodItem.self)
+	func setupTapOnCell(cell: ImageCell, apodItem: ApodItem) {
+		cell.rx.tapGesture().when(.recognized)
+			.map { _ -> ApodItem in
+				return apodItem
+			}
 			.bind(to: viewModel.input.tapOnCell)
 			.disposed(by: disposeBag)
 	}

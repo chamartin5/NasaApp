@@ -20,6 +20,7 @@ class ImageCell: UICollectionViewCell {
 	}
 
 	func configure(url: URL?) {
-		nasaImage.kf.setImage(with: url)
+		let placeholder = UIImage(named: "nasablackandwhite")
+		nasaImage.kf.setImage(with: url, placeholder: placeholder)
 	}
 }

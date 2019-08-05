@@ -20,16 +20,16 @@ class NasaFullSizeViewModel: Stepper {
 	}
 
 	struct Output {
-		let url: Observable<URL?>
+		let url: Observable<ApodUrl>
 	}
 
 	let input: Input
 	let output: Output
-	private let urlSubject = BehaviorRelay<URL?>.init(value: nil)
+	private let urlSubject = ReplaySubject<ApodUrl>.create(bufferSize: 1)
 
-	init(url: URL?) {
+	init(apodUrl: ApodUrl) {
 		self.input = Input()
 		self.output = Output(url: urlSubject.asObservable())
-		urlSubject.accept(url)
+		urlSubject.onNext(apodUrl)
 	}
 }

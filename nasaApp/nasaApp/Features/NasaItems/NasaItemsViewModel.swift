@@ -12,7 +12,7 @@ import RxFlow
 import Result
 import RxDataSources
 
-typealias NasaSectionModel = SectionModel<String, ApodItem>
+typealias NasaSectionModel = SectionModel<String, ApodState>
 
 class NasaItemsViewModel: Stepper {
 	private let nasaApiProvider: NasaAPIProvider!
@@ -55,24 +55,26 @@ private extension NasaItemsViewModel {
 		}
 
 		Observable.zip(observables)
-			.map({ results -> [ApodResponse] in
-				var responses: [ApodResponse] = []
-				print("CMA: \(responses.count)")
+			.map({ results -> [ApodState] in
+				var apodStates: [ApodState] = []
 				results.forEach { result in
 					switch result {
 					case .success(let apodResponse):
 						if apodResponse.mediaType == .image {
-							responses.append(apodResponse)
+							let apodItem = NasaMapper.mapFromWS(apodResponse)
+							apodStates.append(.success(apodItem))
+						} else {
+							apodStates.append(.failure)
 						}
 					case .failure(let error):
-						print("CMA: failure \(error)")
+						apodStates.append(.failure)
 					}
 				}
-				return responses
+				return apodStates
 			})
-			.flatMap({ [weak self] responses -> Observable<[NasaSectionModel]> in
+			.flatMap({ [weak self] apodStates -> Observable<[NasaSectionModel]> in
 				guard let self = self else { return Observable.never() }
-				let sectionModel = self.buildSectionModel(responses: responses)
+				let sectionModel = self.buildSectionModel(apodStates: apodStates)
 				return Observable.just(sectionModel)
 			})
 			.bind(to: sectionsSubject)
@@ -91,9 +93,8 @@ private extension NasaItemsViewModel {
 
 // MARK: build sectionModel
 private extension NasaItemsViewModel {
-	func buildSectionModel(responses: [ApodResponse]) -> [NasaSectionModel] {
-		let items = NasaMapper.mapFromWS(responses)
-		let sectionModel = NasaSectionModel.init(model: "", items: items)
+	func buildSectionModel(apodStates: [ApodState]) -> [NasaSectionModel] {
+		let sectionModel = NasaSectionModel.init(model: "", items: apodStates)
 		return [sectionModel]
 	}
 

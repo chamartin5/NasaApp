@@ -13,7 +13,7 @@ class NasaFlow: Flow {
 		return rootViewController
 	}
 
-	private var rootViewController = UINavigationController()
+	private let rootViewController = UINavigationController()
 
 	func navigate(to step: Step) -> FlowContributors {
 		guard let step = step as? AppStep else { return .none }
@@ -22,8 +22,8 @@ class NasaFlow: Flow {
 			return navigateToApodList()
 		case .apodDetails(let apodItem):
 			return navigateToApodDetails(apodItem: apodItem)
-		case .nasaFullSize(let url):
-			return navigateToNasaFullSize(url: url)
+		case .nasaFullSize(let apodUrl):
+			return navigateToNasaFullSize(apodUrl: apodUrl)
 		}
 	}
 
@@ -52,24 +52,24 @@ class NasaFlow: Flow {
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}
 
-	private func navigateToNasaFullSize(url: URL?) -> FlowContributors {
+	private func navigateToNasaFullSize(apodUrl: ApodUrl) -> FlowContributors {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaFullSizeViewController") as? NasaFullSizeViewController else {
 			return .none
 		}
-		let viewModel = NasaFullSizeViewModel(url: url)
+		let viewModel = NasaFullSizeViewModel(apodUrl: apodUrl)
 		viewController.viewModel = viewModel
 
 		rootViewController.pushViewController(viewController, animated: true)
 		return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
 	}
 
-	func navigateToNasaFullSizeModally(url: URL?) -> FlowContributors {
+	func navigateToNasaFullSizeModally(apodUrl: ApodUrl) -> FlowContributors {
 		let storyboard = UIStoryboard(name: "Main", bundle: nil)
 		guard let viewController = storyboard.instantiateViewController(withIdentifier: "NasaFullSizeViewController") as? NasaFullSizeViewController else {
 			return .none
 		}
-		let viewModel = NasaFullSizeViewModel(url: url)
+		let viewModel = NasaFullSizeViewModel(apodUrl: apodUrl)
 		viewController.viewModel = viewModel
 
 		rootViewController.popViewController(animated: true)

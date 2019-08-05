@@ -10,5 +10,5 @@ import RxFlow
 enum AppStep: Step {
 	case apodList
 	case apodDetails(ApodItem)
-	case nasaFullSize(URL?)
+	case nasaFullSize(ApodUrl)
 }
