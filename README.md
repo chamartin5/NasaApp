@@ -12,7 +12,7 @@ It has 3 screens :
 2. Navigate to project folder
 3. Run pod install
 4. Build the project
-5. Go to [NasaService.swift](nasaApp/nasaApp/Network/NasaService.swift) and replace apiKey by your key
+5. Go to [NasaService.swift](/nasaApp/Network/NasaService.swift) and replace apiKey by your key
 6. Run it on a simulator :iphone:
 
 ## Pods
