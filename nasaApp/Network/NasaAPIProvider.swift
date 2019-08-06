@@ -24,6 +24,7 @@ class NasaAPIProvider {
 
 	func getApod(date: String) -> Single<Result<ApodResponse, NasaError>> {
 		return provider.rx.request(.apod(date))
+			.filterSuccessfulStatusCodes()
 			.map { response -> Result<ApodResponse, NasaError> in
 				let decoder = JSONDecoder()
 				decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -33,6 +34,9 @@ class NasaAPIProvider {
 				} catch {
 					return .failure(.failGetApod(error))
 				}
+			}
+			.catchError { error -> Single<Result<ApodResponse, NasaError>> in
+				return Single.just(.failure(.failGetApod(error)))
 			}
 	}
 }

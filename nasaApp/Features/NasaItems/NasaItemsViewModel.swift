@@ -50,7 +50,6 @@ private extension NasaItemsViewModel {
 
 	func bindSections() {
 		let lastDates = getLast30Days()
-
 		let initialItems = lastDates.map { _ -> ApodState in
 			return .loading
 		}
@@ -59,6 +58,7 @@ private extension NasaItemsViewModel {
 
 		Observable.from(lastDates)
 			.concatMap { [weak self] date -> Single<Result<ApodResponse, NasaError>> in
+
 				guard let self = self else { return Single.never() }
 				return self.nasaApiProvider.getApod(date: date)
 			}
@@ -84,39 +84,6 @@ private extension NasaItemsViewModel {
 			.disposed(by: disposeBag)
 	}
 
-	func bindSections0() {
-		let lastDates = getLast30Days()
-		let observables = lastDates.map { date -> Observable<Result<ApodResponse, NasaError>> in
-			return nasaApiProvider.getApod(date: date).asObservable()
-		}
-
-		Observable.zip(observables)
-			.map({ results -> [ApodState] in
-				var apodStates: [ApodState] = []
-				results.forEach { result in
-					switch result {
-					case .success(let apodResponse):
-						if apodResponse.mediaType == .image {
-							let apodItem = NasaMapper.mapFromWS(apodResponse)
-							apodStates.append(.success(apodItem))
-						} else {
-							apodStates.append(.apodIsVideo)
-						}
-					case .failure:
-						apodStates.append(.failure)
-					}
-				}
-				return apodStates
-			})
-			.flatMap({ [weak self] apodStates -> Observable<[NasaSectionModel]> in
-				guard let self = self else { return Observable.never() }
-				let sectionModel = self.buildSectionModel(apodStates: apodStates)
-				return Observable.just(sectionModel)
-			})
-			.bind(to: sectionsSubject)
-			.disposed(by: disposeBag)
-	}
-
 	func bindTapOnCell() {
 		tapOnCellSubject
 			.map { item -> AppStep in
@@ -133,15 +100,6 @@ private extension NasaItemsViewModel {
 		let sectionModel = NasaSectionModel.init(model: "", items: apodStates)
 		return [sectionModel]
 	}
-
-	func updateSectionModel0(newApodState: ApodState, previousSection: [NasaSectionModel]) -> [NasaSectionModel] {
-		var newSection = previousSection[0]
-		var items = newSection.items
-		items.append(newApodState)
-		newSection.items = items
-		return [newSection]
-	}
-
 	func updateSectionModel(newApodState: ApodState, previousSection: [NasaSectionModel]) -> [NasaSectionModel] {
 		var newSection = previousSection[0]
 		var items = newSection.items
