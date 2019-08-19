@@ -81,7 +81,7 @@ private extension NasaItemsViewController {
 
 // MARK: bindings
 private extension NasaItemsViewController {
-	func  setupBindings() {
+	func setupBindings() {
 		setupDataSource()
 	}
 

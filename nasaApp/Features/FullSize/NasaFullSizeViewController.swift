@@ -22,7 +22,19 @@ final class NasaFullSizeViewController: UIViewController {
 	var viewModel: NasaFullSizeViewModel!
 	private let disposeBag = DisposeBag()
 
-	@IBOutlet private weak var nasaFullSizeImage: UIImageView!
+	@IBOutlet private weak var nasaFullSizeImage: UIImageView! {
+		didSet {
+			nasaFullSizeImage.contentMode = .scaleAspectFit
+		}
+	}
+
+	@IBOutlet weak var scrollView: UIScrollView! {
+		didSet {
+			scrollView.minimumZoomScale = 1.0
+			scrollView.maximumZoomScale = 5.0
+			scrollView.delegate = self
+		}
+	}
 
 	@IBOutlet private weak var closeButton: UIButton! {
 		didSet {
@@ -33,6 +45,11 @@ final class NasaFullSizeViewController: UIViewController {
 			closeButton.setTitleForAllStates("")
 		}
 	}
+
+	@IBOutlet weak var imageViewBottomConstraint: NSLayoutConstraint!
+	@IBOutlet weak var imageViewLeadingConstraint: NSLayoutConstraint!
+	@IBOutlet weak var imageViewTopConstraint: NSLayoutConstraint!
+	@IBOutlet weak var imageViewTrailingConstraint: NSLayoutConstraint!
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -52,7 +69,6 @@ final class NasaFullSizeViewController: UIViewController {
 	func hideLottie() {
 		animationView.stop()
 		animationView.removeFromSuperview()
-
 	}
 }
 
@@ -84,5 +100,12 @@ private extension NasaFullSizeViewController {
 				}
 			})
 			.disposed(by: disposeBag)
+	}
+}
+
+// MARK: zoom
+extension NasaFullSizeViewController: UIScrollViewDelegate {
+	func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+		return nasaFullSizeImage
 	}
 }

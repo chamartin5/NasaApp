@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -160,19 +160,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GMW-0F-nf2">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="vcr-cn-pnM">
-                                        <rect key="frame" x="0.0" y="60" width="240" height="128"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="vcr-cn-pnM" secondAttribute="bottom" constant="50" id="FSv-nc-ckd"/>
-                                    <constraint firstItem="vcr-cn-pnM" firstAttribute="leading" secondItem="GMW-0F-nf2" secondAttribute="leading" id="Q7D-li-hQF"/>
-                                    <constraint firstAttribute="trailing" secondItem="vcr-cn-pnM" secondAttribute="trailing" id="RfY-Sf-mIB"/>
-                                </constraints>
-                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gu-JN-1Du">
                                 <rect key="frame" x="315" y="35" width="30" height="30"/>
                                 <constraints>
@@ -181,27 +168,44 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQx-uc-r5B">
+                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="999" verticalHuggingPriority="999" horizontalCompressionResistancePriority="999" verticalCompressionResistancePriority="999" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="226" translatesAutoresizingMaskIntoConstraints="NO" id="egA-Fm-UD2">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="egA-Fm-UD2" secondAttribute="bottom" id="2B8-8b-myY"/>
+                                    <constraint firstAttribute="trailing" secondItem="egA-Fm-UD2" secondAttribute="trailing" id="9V1-Il-kOu"/>
+                                    <constraint firstItem="egA-Fm-UD2" firstAttribute="leading" secondItem="cQx-uc-r5B" secondAttribute="leading" id="MI7-kK-n7Z"/>
+                                    <constraint firstItem="egA-Fm-UD2" firstAttribute="top" secondItem="cQx-uc-r5B" secondAttribute="top" id="SnY-MR-2lt"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="FXA-R9-6cY" firstAttribute="bottom" secondItem="GMW-0F-nf2" secondAttribute="bottom" id="1e8-Ie-iTF"/>
                             <constraint firstItem="6gu-JN-1Du" firstAttribute="top" secondItem="FXA-R9-6cY" secondAttribute="top" constant="15" id="7Z6-7R-wCo"/>
-                            <constraint firstItem="vcr-cn-pnM" firstAttribute="top" secondItem="6gu-JN-1Du" secondAttribute="bottom" constant="15" id="CKh-Ax-kE4"/>
-                            <constraint firstItem="GMW-0F-nf2" firstAttribute="top" secondItem="FXA-R9-6cY" secondAttribute="top" id="JTL-nr-emm"/>
+                            <constraint firstItem="cQx-uc-r5B" firstAttribute="top" secondItem="6gu-JN-1Du" secondAttribute="bottom" constant="15" id="84e-Qn-8RW"/>
+                            <constraint firstItem="cQx-uc-r5B" firstAttribute="trailing" secondItem="FXA-R9-6cY" secondAttribute="trailing" id="BuT-wB-7J0"/>
+                            <constraint firstItem="egA-Fm-UD2" firstAttribute="width" secondItem="FXA-R9-6cY" secondAttribute="width" id="DuT-Xz-Phh"/>
+                            <constraint firstItem="cQx-uc-r5B" firstAttribute="bottom" secondItem="FXA-R9-6cY" secondAttribute="bottom" id="KNl-gh-hsd"/>
+                            <constraint firstItem="cQx-uc-r5B" firstAttribute="leading" secondItem="FXA-R9-6cY" secondAttribute="leading" id="U46-zU-WSU"/>
                             <constraint firstItem="FXA-R9-6cY" firstAttribute="trailing" secondItem="6gu-JN-1Du" secondAttribute="trailing" constant="30" id="UbR-hK-AHu"/>
-                            <constraint firstItem="GMW-0F-nf2" firstAttribute="leading" secondItem="FXA-R9-6cY" secondAttribute="leading" id="gBy-Of-I5D"/>
-                            <constraint firstItem="FXA-R9-6cY" firstAttribute="trailing" secondItem="GMW-0F-nf2" secondAttribute="trailing" id="k12-YI-Nwg"/>
+                            <constraint firstItem="cQx-uc-r5B" firstAttribute="width" secondItem="FXA-R9-6cY" secondAttribute="width" id="V5G-pH-C6X"/>
+                            <constraint firstItem="egA-Fm-UD2" firstAttribute="height" secondItem="FXA-R9-6cY" secondAttribute="height" id="beU-gx-bfs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FXA-R9-6cY"/>
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="6gu-JN-1Du" id="d0p-CS-FIG"/>
-                        <outlet property="nasaFullSizeImage" destination="vcr-cn-pnM" id="pLO-7b-BLH"/>
+                        <outlet property="nasaFullSizeImage" destination="egA-Fm-UD2" id="lV9-2I-UFU"/>
+                        <outlet property="scrollView" destination="cQx-uc-r5B" id="W1g-Jj-ond"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eD9-kF-HWe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2394" y="23"/>
+            <point key="canvasLocation" x="2392.8000000000002" y="22.938530734632685"/>
         </scene>
     </scenes>
 </document>

@@ -340,7 +340,9 @@ THE SOFTWARE.</string>
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Copyright (c) 2015-2016 Omar Albeik (https://github.com/omaralbeik)
+			<string>MIT License
+
+Copyright (c) 2015-2018 SwifterSwift (https://github.com/swifterswift)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
