@@ -16,6 +16,9 @@ final class NasaFullSizeViewController: UIViewController {
 	private enum Constants {
 		static let loaderName = "loader"
 		static let closeImageName = "close"
+		static let minZoom: CGFloat = 1
+		static let maxZoom: CGFloat = 5
+		static let lottieSize = 200
 	}
 
 	let animationView = AnimationView(name: Constants.loaderName)
@@ -25,13 +28,14 @@ final class NasaFullSizeViewController: UIViewController {
 	@IBOutlet private weak var nasaFullSizeImage: UIImageView! {
 		didSet {
 			nasaFullSizeImage.contentMode = .scaleAspectFit
+			nasaFullSizeImage.isUserInteractionEnabled = true
 		}
 	}
 
 	@IBOutlet weak var scrollView: UIScrollView! {
 		didSet {
-			scrollView.minimumZoomScale = 1.0
-			scrollView.maximumZoomScale = 5.0
+			scrollView.minimumZoomScale = Constants.minZoom
+			scrollView.maximumZoomScale = Constants.maxZoom
 			scrollView.delegate = self
 		}
 	}
@@ -46,20 +50,33 @@ final class NasaFullSizeViewController: UIViewController {
 		}
 	}
 
-	@IBOutlet weak var imageViewBottomConstraint: NSLayoutConstraint!
-	@IBOutlet weak var imageViewLeadingConstraint: NSLayoutConstraint!
-	@IBOutlet weak var imageViewTopConstraint: NSLayoutConstraint!
-	@IBOutlet weak var imageViewTrailingConstraint: NSLayoutConstraint!
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setupLottie()
 		animationView.play()
 		setupBindings()
+		setupImageDoubleTap()
+	}
+}
+
+// MARK: configuration
+private extension NasaFullSizeViewController {
+	func setupImageDoubleTap() {
+		let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
+		gestureRecognizer.numberOfTapsRequired = 2
+		scrollView.addGestureRecognizer(gestureRecognizer)
+	}
+
+	@objc func handleDoubleTap() {
+		if scrollView.zoomScale == Constants.minZoom {
+			scrollView.zoomScale = Constants.maxZoom
+		} else {
+			scrollView.zoomScale = Constants.minZoom
+		}
 	}
 
 	func setupLottie() {
-		animationView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+		animationView.frame = CGRect(x: 0, y: 0, width: Constants.lottieSize, height: Constants.lottieSize)
 		animationView.center = self.view.center
 		animationView.contentMode = .scaleAspectFill
 		animationView.loopMode = .loop
